@@ -1,26 +1,20 @@
 {
   "name": "parking_lot",
   "version": "1.0.0",
-  "description": "a simple implementation of parking lot system",
+  "description": "a simple app to implement the parking lot system",
   "main": "index.js",
   "scripts": {
-    "watch": "tsc -w",
     "start": "node dist/index.js",
     "dev": "nodemon dist/index.js",
-    "test": "jest"
+    "start2": "ts-node src/index.ts",
+    "dev2": "nodemon --exec src/index.ts",
+    "watch": "tsc -w"
   },
   "author": "achyuth reddy",
   "license": "ISC",
   "devDependencies": {
-    "@babel/preset-typescript": "^7.15.0",
-    "@types/babel__core": "^7.1.15",
-    "@types/jest": "^26.0.24",
     "@types/node": "^16.4.13",
-    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
-    "ts-jest": "^27.0.4",
-    "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
-  },
-  "dependencies": {}
+  }
 }
