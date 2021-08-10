@@ -1,5 +1,21 @@
 class ParkingLot {
-  createParkingLot() {}
+  constructor() {
+    this.maxParkingSlots = 0
+    this.parkingSlots = new Array()
+  }
+  maxParkingSlots: number
+  parkingSlots: any[]
+
+  createParkingLot(input: number) {
+    console.log(input)
+
+    if (this.maxParkingSlots === 0)
+      return "the number of parking slots entered should be more than zero "
+    for (let i = 0; i < this.maxParkingSlots; i++) {
+      this.parkingSlots.push(null)
+    }
+    return this.parkingSlots
+  }
   parkCar() {}
   unParkCar() {}
   getAllPrakingStatus() {}
@@ -8,3 +24,8 @@ class ParkingLot {
   getAllSlotsByCarColor() {}
   getNextNearestSlot() {}
 }
+const parkingObj = new ParkingLot()
+const abc = parkingObj.createParkingLot(4)
+console.log("abc", abc)
+
+module.exports = ParkingLot

@@ -5,16 +5,23 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "nodemon dist/index.js",
+    "dev": "nodemon dist/ParkingLot.js",
     "start2": "ts-node src/index.ts",
     "dev2": "nodemon --exec src/index.ts",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "test": "jest"
   },
   "author": "achyuth reddy",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^26.0.24",
     "@types/node": "^16.4.13",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
+    "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "ts-node": "^10.2.0"
   }
 }
