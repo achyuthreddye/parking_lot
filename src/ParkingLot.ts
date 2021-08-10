@@ -22,7 +22,14 @@ class ParkingLot {
   getSlotByCarNo() {}
   getAllCarNumbersByColor() {}
   getAllSlotsByCarColor() {}
-  getNextNearestSlot() {}
+  getNextNearestSlot(currentParkingArray: string[]) {
+    if (!currentParkingArray || currentParkingArray.length === 0)
+      return "Please enter the valid current parking array"
+    for (let i = 0; i < currentParkingArray.length; i++) {
+      if (currentParkingArray[i] === null) return { status: true, value: i }
+    }
+    return { status: false }
+  }
 }
 const parkingObj = new ParkingLot()
 const abc = parkingObj.createParkingLot(4)

@@ -26,6 +26,35 @@ describe("Testing all the methods in the praking lot classes", function () {
       ])
     })
   })
+  describe("checking for the getting the nearest parking lot in the given parking array", () => {
+    test("if the current parking array is not valid, passes", () => {
+      const newParkingLot = new ParkingLot()
+      const currentParkingArray = []
+      expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual(
+        "Please enter the valid current parking array"
+      )
+    })
+    test("valid current parking array is valid, passes", () => {
+      const newParkingLot = new ParkingLot()
+      const currentParkingArray = ["occupied", "occupied", null, "occupied"]
+      expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
+        status: true,
+        value: 2,
+      })
+    })
+    test("valid current parking array is valid and no empty spaces, passes", () => {
+      const newParkingLot = new ParkingLot()
+      const currentParkingArray = [
+        "occupied",
+        "occupied",
+        "occupied",
+        "occupied",
+      ]
+      expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
+        status: false,
+      })
+    })
+  })
 })
 
 // the number of parking slots entered should be more than zero
