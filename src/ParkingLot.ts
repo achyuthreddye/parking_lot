@@ -17,7 +17,30 @@ class ParkingLot {
   }
   parkCar() {}
   unParkCar() {}
-  getAllPrakingStatus() {}
+  getAllParkingStatus() {
+    var arr = new Array()
+    if (this.maxParkingSlots > 0) {
+      // TODO: Implement the table functionality
+      arr.push("Slot No. Registration No. Color ")
+
+      // TODO: can be optimized here
+      for (let i = 0; i < this.parkingSlots.length; i++) {
+        if (this.parkingSlots[i] != null) {
+          const temp = i + 1
+          arr.push(
+            temp +
+              ".  " +
+              this.parkingSlots[i].NUMBER +
+              "  " +
+              this.parkingSlots[i].COLOR
+          )
+        }
+      }
+      return arr
+    } else {
+      return "Parking Lot is Empty"
+    }
+  }
   getSlotByCarNo() {}
   getAllCarNumbersByColor() {}
   getAllSlotsByCarColor() {}
@@ -30,8 +53,8 @@ class ParkingLot {
     return { status: false }
   }
 }
-const parkingObj = new ParkingLot()
-const abc = parkingObj.createParkingLot(4)
-console.log("abc", abc)
+// const parkingObj = new ParkingLot()
+// const abc = parkingObj.createParkingLot(4)
+// console.log("abc", abc)
 
 module.exports = ParkingLot
