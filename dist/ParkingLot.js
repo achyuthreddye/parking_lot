@@ -4,10 +4,9 @@ class ParkingLot {
         this.parkingSlots = new Array();
     }
     createParkingLot(input) {
-        console.log(input);
-        if (this.maxParkingSlots === 0)
-            return "the number of parking slots entered should be more than zero ";
-        for (let i = 0; i < this.maxParkingSlots; i++) {
+        if (!input || input <= 0)
+            return "please enter the valid to allot the no of parking slots";
+        for (let i = 0; i < input; i++) {
             this.parkingSlots.push(null);
         }
         return this.parkingSlots;

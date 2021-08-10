@@ -7,11 +7,10 @@ class ParkingLot {
   parkingSlots: any[]
 
   createParkingLot(input: number) {
-    console.log(input)
+    if (!input || input <= 0)
+      return "please enter the valid to allot the no of parking slots"
 
-    if (this.maxParkingSlots === 0)
-      return "the number of parking slots entered should be more than zero "
-    for (let i = 0; i < this.maxParkingSlots; i++) {
+    for (let i = 0; i < input; i++) {
       this.parkingSlots.push(null)
     }
     return this.parkingSlots
