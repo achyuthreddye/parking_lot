@@ -55,6 +55,64 @@ describe("Testing all the methods in the praking lot classes", function () {
       })
     })
   })
+
+  describe("Creating a new Parking lot and parking the cars in the parking slots", () => {
+    const newParkingLot = new ParkingLot()
+
+    test("create the new parking lot", () => {
+      const totalParkings = newParkingLot.createParkingLot(6)
+      expect(totalParkings).toEqual([null, null, null, null, null, null])
+    })
+    test("park the car 1 , should be parked", () => {
+      const parkedSlot = newParkingLot.parkCar({
+        carNo: "KA40M8500",
+        carColor: "white",
+      })
+      expect(parkedSlot).toBe(1)
+    })
+    test("park the car 2 , should be parked", () => {
+      const parkedSlot = newParkingLot.parkCar({
+        carNo: "KA40M8501",
+        carColor: "red",
+      })
+      expect(parkedSlot).toBe(2)
+    })
+    test("park the car 3 , should be parked", () => {
+      const parkedSlot = newParkingLot.parkCar({
+        carNo: "KA40M8502",
+        carColor: "white",
+      })
+      expect(parkedSlot).toBe(3)
+    })
+    test("park the car 4 , should be parked", () => {
+      const parkedSlot = newParkingLot.parkCar({
+        carNo: "KA40M8503",
+        carColor: "green",
+      })
+      expect(parkedSlot).toBe(4)
+    })
+    test("park the car 5 , should be parked", () => {
+      const parkedSlot = newParkingLot.parkCar({
+        carNo: "KA40M8504",
+        carColor: "white",
+      })
+      expect(parkedSlot).toBe(5)
+    })
+    test("park the car 6 , should be parked", () => {
+      const parkedSlot = newParkingLot.parkCar({
+        carNo: "KA40M8505",
+        carColor: "blue",
+      })
+      expect(parkedSlot).toBe(6)
+    })
+    test("park the car 7, should be parked", () => {
+      const parkedSlot = newParkingLot.parkCar({
+        carNo: "KA40M8506",
+        carColor: "blue",
+      })
+      expect(parkedSlot).toBe("Parking lot is completely filled")
+    })
+  })
 })
 
-// the number of parking slots entered should be more than zero
+//TODO: car input data sanitization has to be performed

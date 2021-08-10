@@ -15,7 +15,9 @@ class ParkingLot {
     }
     return this.parkingSlots
   }
-  parkCar() {}
+  //TODO: implement the car class for the object that is passed
+  parkCar(carObj: any) {}
+
   unParkCar() {}
   getAllParkingStatus() {
     var arr = new Array()
@@ -25,6 +27,7 @@ class ParkingLot {
 
       // TODO: can be optimized here
       for (let i = 0; i < this.parkingSlots.length; i++) {
+        // TODO: need to add element in the parking array as an object which makes it suitable to get the Number and color of the car
         if (this.parkingSlots[i] != null) {
           const temp = i + 1
           arr.push(

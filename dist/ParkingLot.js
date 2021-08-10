@@ -11,7 +11,7 @@ class ParkingLot {
         }
         return this.parkingSlots;
     }
-    parkCar() { }
+    parkCar(carObj) { }
     unParkCar() { }
     getAllParkingStatus() {
         var arr = new Array();
