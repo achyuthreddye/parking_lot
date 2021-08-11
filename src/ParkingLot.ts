@@ -1,3 +1,5 @@
+// const Car = require('../src/Car');
+import { Car } from "./Car"
 class ParkingLot {
   constructor() {
     this.maxParkingSlots = 0
@@ -71,13 +73,15 @@ class ParkingLot {
     for (let i = 0; i < currentParkingArray.length; i++) {
       if (currentParkingArray[i] === null) return { status: true, value: i }
     }
-    return { status: false, value: "already occupied" }
+    return { status: false, value: "Parking lot is completely filled" }
   }
 }
-// const parkingObj = new ParkingLot()
-// const abc = parkingObj.createParkingLot(4)
-// console.log("abc", abc)
+const parkingObj = new ParkingLot()
+const abc = parkingObj.createParkingLot(4)
+const def = parkingObj.parkCar("adfd")
 
+console.log("abc", abc)
+console.log("def", def)
 module.exports = ParkingLot
 
 // }

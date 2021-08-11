@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Car_1 = require("./Car");
 class ParkingLot {
     constructor() {
         this.maxParkingSlots = 0;
@@ -14,7 +17,7 @@ class ParkingLot {
     parkCar(carObj) {
         const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots);
         if (nextNearestStatusObj.status === true) {
-            const car = new Car(carObj.carNumber, carObj.carColor);
+            const car = new Car_1.Car(carObj.carNumber, carObj.carColor);
             this.parkingSlots[Number(nextNearestStatusObj.value)] = car;
             return Number(nextNearestStatusObj.value) + 1;
         }
@@ -56,8 +59,13 @@ class ParkingLot {
             if (currentParkingArray[i] === null)
                 return { status: true, value: i };
         }
-        return { status: false, value: "already occupied" };
+        return { status: false, value: "Parking lot is completely filled" };
     }
 }
+const parkingObj = new ParkingLot();
+const abc = parkingObj.createParkingLot(4);
+const def = parkingObj.parkCar("adfd");
+console.log("abc", abc);
+console.log("def", def);
 module.exports = ParkingLot;
 //# sourceMappingURL=ParkingLot.js.map

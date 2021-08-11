@@ -1,4 +1,4 @@
-class Car {
+export class Car {
   constructor(carNumber: string, carColor: string) {
     this.carNumber = carNumber
     this.carColor = carColor
@@ -7,4 +7,4 @@ class Car {
   carColor: String // TODO: implement if possible with something like enum
 }
 
-module.exports = Car
+// module.exports = Car

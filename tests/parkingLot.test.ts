@@ -53,7 +53,7 @@ describe("Testing all the methods in the praking lot classes", function () {
       ]
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
         status: false,
-        value: "already occupied",
+        value: "Parking lot is completely filled",
       })
     })
   })

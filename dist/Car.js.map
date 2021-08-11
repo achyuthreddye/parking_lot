@@ -1,1 +1,1 @@
-{"version":3,"file":"Car.js","sourceRoot":"","sources":["../src/Car.ts"],"names":[],"mappings":"AAAA,MAAM,GAAG;IACP,YAAY,SAAiB,EAAE,QAAgB;QAC7C,IAAI,CAAC,SAAS,GAAG,SAAS,CAAA;QAC1B,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAA;IAC1B,CAAC;CAGF;AAED,MAAM,CAAC,OAAO,GAAG,GAAG,CAAA"}
+{"version":3,"file":"Car.js","sourceRoot":"","sources":["../src/Car.ts"],"names":[],"mappings":";;;AAAA,MAAa,GAAG;IACd,YAAY,SAAiB,EAAE,QAAgB;QAC7C,IAAI,CAAC,SAAS,GAAG,SAAS,CAAA;QAC1B,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAA;IAC1B,CAAC;CAGF;AAPD,kBAOC"}
