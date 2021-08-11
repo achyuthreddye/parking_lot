@@ -11,7 +11,17 @@ class ParkingLot {
         }
         return this.parkingSlots;
     }
-    parkCar(carObj) { }
+    parkCar(carObj) {
+        const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots);
+        if (nextNearestStatusObj.status === true) {
+            const car = new Car(carObj.carNumber, carObj.carColor);
+            this.parkingSlots[Number(nextNearestStatusObj.value)] = car;
+            return Number(nextNearestStatusObj.value) + 1;
+        }
+        else {
+            return nextNearestStatusObj.value;
+        }
+    }
     unParkCar() { }
     getAllParkingStatus() {
         var arr = new Array();
@@ -38,12 +48,15 @@ class ParkingLot {
     getAllSlotsByCarColor() { }
     getNextNearestSlot(currentParkingArray) {
         if (!currentParkingArray || currentParkingArray.length === 0)
-            return "Please enter the valid current parking array";
+            return {
+                status: false,
+                value: "Please enter the valid current parking array",
+            };
         for (let i = 0; i < currentParkingArray.length; i++) {
             if (currentParkingArray[i] === null)
                 return { status: true, value: i };
         }
-        return { status: false };
+        return { status: false, value: "already occupied" };
     }
 }
 module.exports = ParkingLot;

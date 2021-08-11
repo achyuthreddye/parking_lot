@@ -16,7 +16,22 @@ class ParkingLot {
     return this.parkingSlots
   }
   //TODO: implement the car class for the object that is passed
-  parkCar(carObj: any) {}
+  parkCar(carObj: any) {
+    //var len = this.parkingSlots.length // tells the current length
+
+    // var car, carNumber, carColor
+    const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
+    if (nextNearestStatusObj.status === true) {
+      const car = new Car(carObj.carNumber, carObj.carColor) // car data sanitization can be done here or when it is read from the input
+      // if (nextNearestStatusObj.value) {
+      this.parkingSlots[Number(nextNearestStatusObj.value)] = car
+      return Number(nextNearestStatusObj.value) + 1
+    } else {
+      // TODO: implement the error in the getNextParking functionality itself
+      // throw new Error("Sorry, parking lot is full")
+      return nextNearestStatusObj.value
+    }
+  }
 
   unParkCar() {}
   getAllParkingStatus() {
@@ -49,11 +64,14 @@ class ParkingLot {
   getAllSlotsByCarColor() {}
   getNextNearestSlot(currentParkingArray: string[]) {
     if (!currentParkingArray || currentParkingArray.length === 0)
-      return "Please enter the valid current parking array"
+      return {
+        status: false,
+        value: "Please enter the valid current parking array",
+      }
     for (let i = 0; i < currentParkingArray.length; i++) {
       if (currentParkingArray[i] === null) return { status: true, value: i }
     }
-    return { status: false }
+    return { status: false, value: "already occupied" }
   }
 }
 // const parkingObj = new ParkingLot()
@@ -61,3 +79,19 @@ class ParkingLot {
 // console.log("abc", abc)
 
 module.exports = ParkingLot
+
+// }
+// for (var i = 0; i < len; i++) {
+//   if (this.parkingSlots[i] == null) {
+//     carNumber = carObj.carNo
+//     carColor = carObj.carColor
+//     if (carNumber && carColor) {
+//       car = new Car(carNumber, carColor)
+//       this.parkingSlots[i] = car
+//       i = i + 1
+//       return i
+//     } else {
+//       throw new Error("Please provide registration number and color both")
+//     }
+//   }
+// }

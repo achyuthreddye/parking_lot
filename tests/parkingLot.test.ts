@@ -30,9 +30,10 @@ describe("Testing all the methods in the praking lot classes", function () {
     test("if the current parking array is not valid, passes", () => {
       const newParkingLot = new ParkingLot()
       const currentParkingArray = []
-      expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual(
-        "Please enter the valid current parking array"
-      )
+      expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
+        status: false,
+        value: "Please enter the valid current parking array",
+      })
     })
     test("valid current parking array is valid, passes", () => {
       const newParkingLot = new ParkingLot()
@@ -52,6 +53,7 @@ describe("Testing all the methods in the praking lot classes", function () {
       ]
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
         status: false,
+        value: "already occupied",
       })
     })
   })
@@ -65,49 +67,49 @@ describe("Testing all the methods in the praking lot classes", function () {
     })
     test("park the car 1 , should be parked", () => {
       const parkedSlot = newParkingLot.parkCar({
-        carNo: "KA40M8500",
+        carNumber: "KA40M8500",
         carColor: "white",
       })
       expect(parkedSlot).toBe(1)
     })
     test("park the car 2 , should be parked", () => {
       const parkedSlot = newParkingLot.parkCar({
-        carNo: "KA40M8501",
+        carNumber: "KA40M8501",
         carColor: "red",
       })
       expect(parkedSlot).toBe(2)
     })
     test("park the car 3 , should be parked", () => {
       const parkedSlot = newParkingLot.parkCar({
-        carNo: "KA40M8502",
+        carNumber: "KA40M8502",
         carColor: "white",
       })
       expect(parkedSlot).toBe(3)
     })
     test("park the car 4 , should be parked", () => {
       const parkedSlot = newParkingLot.parkCar({
-        carNo: "KA40M8503",
+        carNumber: "KA40M8503",
         carColor: "green",
       })
       expect(parkedSlot).toBe(4)
     })
     test("park the car 5 , should be parked", () => {
       const parkedSlot = newParkingLot.parkCar({
-        carNo: "KA40M8504",
+        carNumber: "KA40M8504",
         carColor: "white",
       })
       expect(parkedSlot).toBe(5)
     })
     test("park the car 6 , should be parked", () => {
       const parkedSlot = newParkingLot.parkCar({
-        carNo: "KA40M8505",
+        carNumber: "KA40M8505",
         carColor: "blue",
       })
       expect(parkedSlot).toBe(6)
     })
     test("park the car 7, should be parked", () => {
       const parkedSlot = newParkingLot.parkCar({
-        carNo: "KA40M8506",
+        carNumber: "KA40M8506",
         carColor: "blue",
       })
       expect(parkedSlot).toBe("Parking lot is completely filled")
