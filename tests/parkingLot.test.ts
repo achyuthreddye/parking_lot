@@ -1,12 +1,13 @@
 // const Parking = require("../src/ParkingLot")
-const ParkingLot = require("../dist/ParkingLot")
+// const ParkingLot = require("../dist/ParkingLot")
+import { ParkingLot } from "../src/ParkingLot"
 // ParkingLot
 
 describe("Testing all the methods in the praking lot classes", function () {
   describe("creating the Parking lot", () => {
     test("No maximum parking lot size given ,passes", () => {
       const newParkingLot = new ParkingLot()
-      expect(newParkingLot.createParkingLot()).toEqual(
+      expect(newParkingLot.createParkingLot(56)).toEqual(
         "please enter the valid to allot the no of parking slots"
       )
     })
@@ -45,6 +46,7 @@ describe("Testing all the methods in the praking lot classes", function () {
     })
     test("valid current parking array is valid and no empty spaces, passes", () => {
       const newParkingLot = new ParkingLot()
+      // TODO: It contains the array of car objects but it is mimicked here
       const currentParkingArray = [
         "occupied",
         "occupied",
@@ -107,7 +109,7 @@ describe("Testing all the methods in the praking lot classes", function () {
       })
       expect(parkedSlot).toBe(6)
     })
-    test("park the car 7, should be parked", () => {
+    test("park the car 7, should not be parked", () => {
       const parkedSlot = newParkingLot.parkCar({
         carNumber: "KA40M8506",
         carColor: "blue",

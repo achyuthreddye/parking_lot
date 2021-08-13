@@ -1,6 +1,6 @@
 // const Car = require('../src/Car');
 import { Car } from "./Car"
-class ParkingLot {
+export class ParkingLot {
   constructor() {
     this.maxParkingSlots = 0
     this.parkingSlots = new Array()
@@ -11,6 +11,7 @@ class ParkingLot {
   createParkingLot(input: number) {
     if (!input || input <= 0)
       return "please enter the valid to allot the no of parking slots"
+    this.maxParkingSlots = input
 
     for (let i = 0; i < input; i++) {
       this.parkingSlots.push(null)
@@ -27,7 +28,7 @@ class ParkingLot {
       const car = new Car(carObj.carNumber, carObj.carColor) // car data sanitization can be done here or when it is read from the input
       // if (nextNearestStatusObj.value) {
       this.parkingSlots[Number(nextNearestStatusObj.value)] = car
-      return Number(nextNearestStatusObj.value) + 1
+      return Number(nextNearestStatusObj.value)
     } else {
       // TODO: implement the error in the getNextParking functionality itself
       // throw new Error("Sorry, parking lot is full")
@@ -70,8 +71,8 @@ class ParkingLot {
         status: false,
         value: "Please enter the valid current parking array",
       }
-    for (let i = 0; i < currentParkingArray.length; i++) {
-      if (currentParkingArray[i] === null) return { status: true, value: i }
+    for (let i = 1; i <= currentParkingArray.length; i++) {
+      if (currentParkingArray[i - 1] === null) return { status: true, value: i }
     }
     return { status: false, value: "Parking lot is completely filled" }
   }
@@ -82,7 +83,7 @@ const def = parkingObj.parkCar("adfd")
 
 console.log("abc", abc)
 console.log("def", def)
-module.exports = ParkingLot
+// module.exports = ParkingLot
 
 // }
 // for (var i = 0; i < len; i++) {

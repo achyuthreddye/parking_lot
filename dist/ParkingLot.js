@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ParkingLot = void 0;
 const Car_1 = require("./Car");
 class ParkingLot {
     constructor() {
@@ -9,6 +10,7 @@ class ParkingLot {
     createParkingLot(input) {
         if (!input || input <= 0)
             return "please enter the valid to allot the no of parking slots";
+        this.maxParkingSlots = input;
         for (let i = 0; i < input; i++) {
             this.parkingSlots.push(null);
         }
@@ -19,7 +21,7 @@ class ParkingLot {
         if (nextNearestStatusObj.status === true) {
             const car = new Car_1.Car(carObj.carNumber, carObj.carColor);
             this.parkingSlots[Number(nextNearestStatusObj.value)] = car;
-            return Number(nextNearestStatusObj.value) + 1;
+            return Number(nextNearestStatusObj.value);
         }
         else {
             return nextNearestStatusObj.value;
@@ -55,17 +57,17 @@ class ParkingLot {
                 status: false,
                 value: "Please enter the valid current parking array",
             };
-        for (let i = 0; i < currentParkingArray.length; i++) {
-            if (currentParkingArray[i] === null)
+        for (let i = 1; i <= currentParkingArray.length; i++) {
+            if (currentParkingArray[i - 1] === null)
                 return { status: true, value: i };
         }
         return { status: false, value: "Parking lot is completely filled" };
     }
 }
+exports.ParkingLot = ParkingLot;
 const parkingObj = new ParkingLot();
 const abc = parkingObj.createParkingLot(4);
 const def = parkingObj.parkCar("adfd");
 console.log("abc", abc);
 console.log("def", def);
-module.exports = ParkingLot;
 //# sourceMappingURL=ParkingLot.js.map
