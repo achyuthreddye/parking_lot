@@ -1,7 +1,4 @@
-// const Parking = require("../src/ParkingLot")
-// const ParkingLot = require("../dist/ParkingLot")
 import { ParkingLot } from "../src/ParkingLot"
-// ParkingLot
 
 describe("Testing all the methods in the praking lot classes", function () {
   describe("creating the Parking lot", () => {
@@ -30,7 +27,8 @@ describe("Testing all the methods in the praking lot classes", function () {
   describe("checking for the getting the nearest parking lot in the given parking array", () => {
     test("if the current parking array is not valid, passes", () => {
       const newParkingLot = new ParkingLot()
-      const currentParkingArray = []
+      let currentParkingArray: Array<string>
+      currentParkingArray = []
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
         status: false,
         value: "Please enter the valid current parking array",
@@ -38,7 +36,8 @@ describe("Testing all the methods in the praking lot classes", function () {
     })
     test("valid current parking array is valid, passes", () => {
       const newParkingLot = new ParkingLot()
-      const currentParkingArray = ["occupied", "occupied", null, "occupied"]
+      let currentParkingArray: Array<any>
+      currentParkingArray = ["carObject", "carObject", null, "carObject"]
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
         status: true,
         value: 2,
@@ -47,12 +46,8 @@ describe("Testing all the methods in the praking lot classes", function () {
     test("valid current parking array is valid and no empty spaces, passes", () => {
       const newParkingLot = new ParkingLot()
       // TODO: It contains the array of car objects but it is mimicked here
-      const currentParkingArray = [
-        "occupied",
-        "occupied",
-        "occupied",
-        "occupied",
-      ]
+      let currentParkingArray: Array<string>
+      currentParkingArray = ["carObject", "carObject", "carObject", "carObject"]
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
         status: false,
         value: "Parking lot is completely filled",

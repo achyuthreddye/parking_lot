@@ -83,7 +83,6 @@ const def = parkingObj.parkCar("adfd")
 
 console.log("abc", abc)
 console.log("def", def)
-// module.exports = ParkingLot
 
 // }
 // for (var i = 0; i < len; i++) {
