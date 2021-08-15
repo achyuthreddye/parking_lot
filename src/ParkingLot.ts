@@ -12,29 +12,19 @@ export class ParkingLot {
     if (!input || input <= 0)
       return "please enter the valid to allot the no of parking slots"
     this.maxParkingSlots = input
-    const dummyParkingSlots: Slot[] = []
 
     for (let i = 0; i < input; i++) {
-      // TODO: add the empty slot objects in here
-      dummyParkingSlots.push(new Slot(i + 1))
-
-      // this.parkingSlots.push(null)
       this.parkingSlots.push(new Slot(i + 1))
     }
-    console.log("dummyParkingSlots", dummyParkingSlots)
 
     return this.parkingSlots
   }
   //TODO: implement the car class for the object that is passed
   parkCar(carObj: Car) {
-    //var len = this.parkingSlots.length // tells the current length
-
-    // var car, carNumber, carColor
-    // console.log("car object ", carObj)
-
     const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
     if (nextNearestStatusObj.status === true) {
       const car = new Car(carObj.carNumber, carObj.carColor)
+
       // TODO:car data sanitization can be done here or when it is read from the input
       // if (nextNearestStatusObj.value) {
       this.parkingSlots[Number(nextNearestStatusObj.value)].car = car
@@ -73,9 +63,17 @@ export class ParkingLot {
       return "Parking Lot is Empty"
     }
   }
-  getSlotByCarNo() {}
+
+  getSlotByCarNo(carNumber: string) {
+    this.parkingSlots.forEach((slot) => {
+      if (slot.car.carNumber === carNumber) return slot.slotId
+    })
+    return "car is not parked"
+  }
+
   getAllCarNumbersByColor() {}
   getAllSlotsByCarColor() {}
+
   getNextNearestSlot(currentParkingArray: Slot[]) {
     if (!currentParkingArray || currentParkingArray.length === 0)
       return {
@@ -95,22 +93,8 @@ const def = parkingObj.parkCar({
   carNumber: "KA40M8501",
   carColor: "red",
 })
+const ghi = parkingObj.getSlotByCarNo("KA40M8501")
 
 console.log("abc", abc)
 console.log("def", def)
-// TODO: change all the null objects to the car objects
-// }
-// for (var i = 0; i < len; i++) {
-//   if (this.parkingSlots[i] == null) {
-//     carNumber = carObj.carNo
-//     carColor = carObj.carColor
-//     if (carNumber && carColor) {
-//       car = new Car(carNumber, carColor)
-//       this.parkingSlots[i] = car
-//       i = i + 1
-//       return i
-//     } else {
-//       throw new Error("Please provide registration number and color both")
-//     }
-//   }
-// }
+console.log("ghi", ghi)

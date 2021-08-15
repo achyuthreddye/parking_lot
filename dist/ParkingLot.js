@@ -12,12 +12,9 @@ class ParkingLot {
         if (!input || input <= 0)
             return "please enter the valid to allot the no of parking slots";
         this.maxParkingSlots = input;
-        const dummyParkingSlots = [];
         for (let i = 0; i < input; i++) {
-            dummyParkingSlots.push(new Slot_1.Slot(i + 1));
             this.parkingSlots.push(new Slot_1.Slot(i + 1));
         }
-        console.log("dummyParkingSlots", dummyParkingSlots);
         return this.parkingSlots;
     }
     parkCar(carObj) {
@@ -53,7 +50,13 @@ class ParkingLot {
             return "Parking Lot is Empty";
         }
     }
-    getSlotByCarNo() { }
+    getSlotByCarNo(carNumber) {
+        this.parkingSlots.forEach((slot) => {
+            if (slot.car.carNumber === carNumber)
+                return slot.slotId;
+        });
+        return "car is not parked";
+    }
     getAllCarNumbersByColor() { }
     getAllSlotsByCarColor() { }
     getNextNearestSlot(currentParkingArray) {
@@ -76,6 +79,8 @@ const def = parkingObj.parkCar({
     carNumber: "KA40M8501",
     carColor: "red",
 });
+const ghi = parkingObj.getSlotByCarNo("KA40M8501");
 console.log("abc", abc);
 console.log("def", def);
+console.log("ghi", ghi);
 //# sourceMappingURL=ParkingLot.js.map
