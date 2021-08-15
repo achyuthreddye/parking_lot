@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ParkingLot = void 0;
 const Car_1 = require("./Car");
+const Slot_1 = require("./Slot");
 class ParkingLot {
     constructor() {
         this.maxParkingSlots = 0;
@@ -11,17 +12,21 @@ class ParkingLot {
         if (!input || input <= 0)
             return "please enter the valid to allot the no of parking slots";
         this.maxParkingSlots = input;
+        const dummyParkingSlots = [];
         for (let i = 0; i < input; i++) {
-            this.parkingSlots.push(null);
+            dummyParkingSlots.push(new Slot_1.Slot(i + 1));
+            this.parkingSlots.push(new Slot_1.Slot(i + 1));
         }
+        console.log("dummyParkingSlots", dummyParkingSlots);
         return this.parkingSlots;
     }
     parkCar(carObj) {
         const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots);
         if (nextNearestStatusObj.status === true) {
             const car = new Car_1.Car(carObj.carNumber, carObj.carColor);
-            this.parkingSlots[Number(nextNearestStatusObj.value)] = car;
-            return Number(nextNearestStatusObj.value) + 1;
+            this.parkingSlots[Number(nextNearestStatusObj.value)].car = car;
+            this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true;
+            return this.parkingSlots[Number(nextNearestStatusObj.value)].slotId;
         }
         else {
             return nextNearestStatusObj.value;
@@ -37,9 +42,9 @@ class ParkingLot {
                     const temp = i + 1;
                     arr.push(temp +
                         ".  " +
-                        this.parkingSlots[i].NUMBER +
+                        this.parkingSlots[i].car.carNumber +
                         "  " +
-                        this.parkingSlots[i].COLOR);
+                        this.parkingSlots[i].car.carColor);
                 }
             }
             return arr;
@@ -58,7 +63,7 @@ class ParkingLot {
                 value: "Please enter the valid current parking array",
             };
         for (let i = 0; i < currentParkingArray.length; i++) {
-            if (currentParkingArray[i] === null)
+            if (currentParkingArray[i].parkStatus === false)
                 return { status: true, value: i };
         }
         return { status: false, value: "Parking lot is completely filled" };
@@ -67,7 +72,10 @@ class ParkingLot {
 exports.ParkingLot = ParkingLot;
 const parkingObj = new ParkingLot();
 const abc = parkingObj.createParkingLot(4);
-const def = parkingObj.parkCar("adfd");
+const def = parkingObj.parkCar({
+    carNumber: "KA40M8501",
+    carColor: "red",
+});
 console.log("abc", abc);
 console.log("def", def);
 //# sourceMappingURL=ParkingLot.js.map

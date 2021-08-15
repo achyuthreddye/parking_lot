@@ -1,4 +1,5 @@
 import { ParkingLot } from "../src/ParkingLot"
+import { Slot } from "../src/Slot"
 
 describe("Testing all the methods in the praking lot classes", function () {
   describe("creating the Parking lot", () => {
@@ -17,17 +18,33 @@ describe("Testing all the methods in the praking lot classes", function () {
     test("valid maximum parking lot size given ,passes", () => {
       const newParkingLot = new ParkingLot()
       expect(newParkingLot.createParkingLot(4)).toEqual([
-        null,
-        null,
-        null,
-        null,
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 1,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 2,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 3,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 4,
+        },
       ])
     })
   })
   describe("checking for the getting the nearest parking lot in the given parking array", () => {
     test("invalid current parking array is given, passes", () => {
       const newParkingLot = new ParkingLot()
-      let currentParkingArray: Array<string>
+      let currentParkingArray: Array<Slot>
       currentParkingArray = []
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
         status: false,
@@ -36,8 +53,29 @@ describe("Testing all the methods in the praking lot classes", function () {
     })
     test("valid current parking array is given, passes", () => {
       const newParkingLot = new ParkingLot()
-      let currentParkingArray: Array<any>
-      currentParkingArray = ["carObject", "carObject", null, "carObject"]
+      let currentParkingArray: Array<Slot>
+      currentParkingArray = [
+        {
+          parkStatus: true,
+          car: { carColor: "white", carNumber: "KA40M8500" },
+          slotId: 1,
+        },
+        {
+          parkStatus: true,
+          car: { carColor: "green", carNumber: "KA40M8501" },
+          slotId: 2,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 3,
+        },
+        {
+          parkStatus: true,
+          car: { carColor: "red", carNumber: "KA40M8502" },
+          slotId: 4,
+        },
+      ]
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
         status: true,
         value: 2,
@@ -46,8 +84,29 @@ describe("Testing all the methods in the praking lot classes", function () {
     test("valid current parking array is valid and no empty spaces, passes", () => {
       const newParkingLot = new ParkingLot()
       // FIXME: It contains the array of car objects but it is mimicked here should be changed
-      let currentParkingArray: Array<string>
-      currentParkingArray = ["carObject", "carObject", "carObject", "carObject"]
+      let currentParkingArray: Array<Slot>
+      currentParkingArray = [
+        {
+          parkStatus: true,
+          car: { carColor: "white", carNumber: "KA40M8500" },
+          slotId: 1,
+        },
+        {
+          parkStatus: true,
+          car: { carColor: "white", carNumber: "KA40M8501" },
+          slotId: 2,
+        },
+        {
+          parkStatus: true,
+          car: { carColor: "white", carNumber: "KA40M8502" },
+          slotId: 3,
+        },
+        {
+          parkStatus: true,
+          car: { carColor: "white", carNumber: "KA40M8503" },
+          slotId: 4,
+        },
+      ]
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({
         status: false,
         value: "Parking lot is completely filled",
@@ -60,7 +119,38 @@ describe("Testing all the methods in the praking lot classes", function () {
 
     test("create the new parking lot", () => {
       const totalParkings = newParkingLot.createParkingLot(6)
-      expect(totalParkings).toEqual([null, null, null, null, null, null])
+      expect(totalParkings).toEqual([
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 1,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 2,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 3,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 4,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 5,
+        },
+        {
+          parkStatus: false,
+          car: { carColor: "", carNumber: "" },
+          slotId: 6,
+        },
+      ])
     })
     test("park the car 1 , should be parked", () => {
       const parkedSlot = newParkingLot.parkCar({

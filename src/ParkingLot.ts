@@ -1,34 +1,45 @@
 import { Car } from "./Car"
+import { Slot } from "./Slot"
 export class ParkingLot {
   constructor() {
     this.maxParkingSlots = 0
     this.parkingSlots = new Array()
   }
   maxParkingSlots: number
-  parkingSlots: any[]
+  parkingSlots: Slot[]
 
   createParkingLot(input: number) {
     if (!input || input <= 0)
       return "please enter the valid to allot the no of parking slots"
     this.maxParkingSlots = input
+    const dummyParkingSlots: Slot[] = []
 
     for (let i = 0; i < input; i++) {
       // TODO: add the empty slot objects in here
-      this.parkingSlots.push(null)
+      dummyParkingSlots.push(new Slot(i + 1))
+
+      // this.parkingSlots.push(null)
+      this.parkingSlots.push(new Slot(i + 1))
     }
+    console.log("dummyParkingSlots", dummyParkingSlots)
+
     return this.parkingSlots
   }
   //TODO: implement the car class for the object that is passed
-  parkCar(carObj: any) {
+  parkCar(carObj: Car) {
     //var len = this.parkingSlots.length // tells the current length
 
     // var car, carNumber, carColor
+    // console.log("car object ", carObj)
+
     const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
     if (nextNearestStatusObj.status === true) {
-      const car = new Car(carObj.carNumber, carObj.carColor) // car data sanitization can be done here or when it is read from the input
+      const car = new Car(carObj.carNumber, carObj.carColor)
+      // TODO:car data sanitization can be done here or when it is read from the input
       // if (nextNearestStatusObj.value) {
-      this.parkingSlots[Number(nextNearestStatusObj.value)] = car
-      return Number(nextNearestStatusObj.value) + 1
+      this.parkingSlots[Number(nextNearestStatusObj.value)].car = car
+      this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true
+      return this.parkingSlots[Number(nextNearestStatusObj.value)].slotId
     } else {
       // TODO: implement the error in the getNextParking functionality itself
       // throw new Error("Sorry, parking lot is full")
@@ -51,9 +62,9 @@ export class ParkingLot {
           arr.push(
             temp +
               ".  " +
-              this.parkingSlots[i].NUMBER +
+              this.parkingSlots[i].car.carNumber +
               "  " +
-              this.parkingSlots[i].COLOR
+              this.parkingSlots[i].car.carColor
           )
         }
       }
@@ -65,21 +76,25 @@ export class ParkingLot {
   getSlotByCarNo() {}
   getAllCarNumbersByColor() {}
   getAllSlotsByCarColor() {}
-  getNextNearestSlot(currentParkingArray: string[]) {
+  getNextNearestSlot(currentParkingArray: Slot[]) {
     if (!currentParkingArray || currentParkingArray.length === 0)
       return {
         status: false,
         value: "Please enter the valid current parking array",
       }
     for (let i = 0; i < currentParkingArray.length; i++) {
-      if (currentParkingArray[i] === null) return { status: true, value: i }
+      if (currentParkingArray[i].parkStatus === false)
+        return { status: true, value: i }
     }
     return { status: false, value: "Parking lot is completely filled" }
   }
 }
 const parkingObj = new ParkingLot()
 const abc = parkingObj.createParkingLot(4)
-const def = parkingObj.parkCar("adfd")
+const def = parkingObj.parkCar({
+  carNumber: "KA40M8501",
+  carColor: "red",
+})
 
 console.log("abc", abc)
 console.log("def", def)
