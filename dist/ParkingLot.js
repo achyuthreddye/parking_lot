@@ -21,7 +21,7 @@ class ParkingLot {
         if (nextNearestStatusObj.status === true) {
             const car = new Car_1.Car(carObj.carNumber, carObj.carColor);
             this.parkingSlots[Number(nextNearestStatusObj.value)] = car;
-            return Number(nextNearestStatusObj.value);
+            return Number(nextNearestStatusObj.value) + 1;
         }
         else {
             return nextNearestStatusObj.value;
@@ -57,8 +57,8 @@ class ParkingLot {
                 status: false,
                 value: "Please enter the valid current parking array",
             };
-        for (let i = 1; i <= currentParkingArray.length; i++) {
-            if (currentParkingArray[i - 1] === null)
+        for (let i = 0; i < currentParkingArray.length; i++) {
+            if (currentParkingArray[i] === null)
                 return { status: true, value: i };
         }
         return { status: false, value: "Parking lot is completely filled" };

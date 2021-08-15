@@ -13,6 +13,7 @@ export class ParkingLot {
     this.maxParkingSlots = input
 
     for (let i = 0; i < input; i++) {
+      // TODO: add the empty slot objects in here
       this.parkingSlots.push(null)
     }
     return this.parkingSlots
@@ -27,7 +28,7 @@ export class ParkingLot {
       const car = new Car(carObj.carNumber, carObj.carColor) // car data sanitization can be done here or when it is read from the input
       // if (nextNearestStatusObj.value) {
       this.parkingSlots[Number(nextNearestStatusObj.value)] = car
-      return Number(nextNearestStatusObj.value)
+      return Number(nextNearestStatusObj.value) + 1
     } else {
       // TODO: implement the error in the getNextParking functionality itself
       // throw new Error("Sorry, parking lot is full")
@@ -70,8 +71,8 @@ export class ParkingLot {
         status: false,
         value: "Please enter the valid current parking array",
       }
-    for (let i = 1; i <= currentParkingArray.length; i++) {
-      if (currentParkingArray[i - 1] === null) return { status: true, value: i }
+    for (let i = 0; i < currentParkingArray.length; i++) {
+      if (currentParkingArray[i] === null) return { status: true, value: i }
     }
     return { status: false, value: "Parking lot is completely filled" }
   }
