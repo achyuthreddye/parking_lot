@@ -25,7 +25,7 @@ describe("Testing all the methods in the praking lot classes", function () {
     })
   })
   describe("checking for the getting the nearest parking lot in the given parking array", () => {
-    test("if the current parking array is not valid, passes", () => {
+    test("invalid current parking array is given, passes", () => {
       const newParkingLot = new ParkingLot()
       let currentParkingArray: Array<string>
       currentParkingArray = []
@@ -34,7 +34,7 @@ describe("Testing all the methods in the praking lot classes", function () {
         value: "Please enter the valid current parking array",
       })
     })
-    test("valid current parking array is valid, passes", () => {
+    test("valid current parking array is given, passes", () => {
       const newParkingLot = new ParkingLot()
       let currentParkingArray: Array<any>
       currentParkingArray = ["carObject", "carObject", null, "carObject"]
@@ -45,7 +45,7 @@ describe("Testing all the methods in the praking lot classes", function () {
     })
     test("valid current parking array is valid and no empty spaces, passes", () => {
       const newParkingLot = new ParkingLot()
-      // TODO: It contains the array of car objects but it is mimicked here
+      // FIXME: It contains the array of car objects but it is mimicked here should be changed
       let currentParkingArray: Array<string>
       currentParkingArray = ["carObject", "carObject", "carObject", "carObject"]
       expect(newParkingLot.getNextNearestSlot(currentParkingArray)).toEqual({

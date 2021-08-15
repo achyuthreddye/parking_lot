@@ -1,4 +1,3 @@
-// const Car = require('../src/Car');
 import { Car } from "./Car"
 export class ParkingLot {
   constructor() {
@@ -83,7 +82,7 @@ const def = parkingObj.parkCar("adfd")
 
 console.log("abc", abc)
 console.log("def", def)
-
+// TODO: change all the null objects to the car objects
 // }
 // for (var i = 0; i < len; i++) {
 //   if (this.parkingSlots[i] == null) {
