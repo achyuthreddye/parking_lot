@@ -9,13 +9,14 @@ class ParkingLot {
         this.parkingSlots = new Array();
     }
     createParkingLot(input) {
-        if (!input || input <= 0)
+        if (!input || input <= 0) {
             return "please enter the valid number to allot the maximum no of parking slots";
+        }
         this.maxParkingSlots = input;
         for (let i = 0; i < input; i++) {
             this.parkingSlots.push(new Slot_1.Slot(i + 1));
         }
-        return this.parkingSlots;
+        return "Created a parking lot with " + this.parkingSlots.length + " slots";
     }
     parkCar(carInputString) {
         const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots);
@@ -33,7 +34,7 @@ class ParkingLot {
             return nextNearestStatusObj.value;
         }
     }
-    unParkCar(carNo) {
+    unParkCarByCarNumber(carNo) {
         for (let i = 0; i < this.parkingSlots.length; i++) {
             if (this.parkingSlots[i].parkStatus &&
                 this.parkingSlots[i].car.carNumber == carNo) {

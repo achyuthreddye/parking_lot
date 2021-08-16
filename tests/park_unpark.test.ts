@@ -5,38 +5,7 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
 
   test("create the new parking lot", () => {
     const totalParkings = newParkingLot.createParkingLot(6)
-    expect(totalParkings).toEqual([
-      {
-        parkStatus: false,
-        car: { carColor: "", carNumber: "" },
-        slotId: 1,
-      },
-      {
-        parkStatus: false,
-        car: { carColor: "", carNumber: "" },
-        slotId: 2,
-      },
-      {
-        parkStatus: false,
-        car: { carColor: "", carNumber: "" },
-        slotId: 3,
-      },
-      {
-        parkStatus: false,
-        car: { carColor: "", carNumber: "" },
-        slotId: 4,
-      },
-      {
-        parkStatus: false,
-        car: { carColor: "", carNumber: "" },
-        slotId: 5,
-      },
-      {
-        parkStatus: false,
-        car: { carColor: "", carNumber: "" },
-        slotId: 6,
-      },
-    ])
+    expect(totalParkings).toEqual("Created a parking lot with 6 slots")
   })
   test("send the invalid car details , should throw an error", () => {
     const parkedSlot = newParkingLot.parkCar("park  white")
@@ -71,15 +40,15 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     expect(parkedSlot).toBe("Parking lot is completely filled")
   })
   test("unpark park the car 6 , should be removed from the list", () => {
-    const parkedSlot = newParkingLot.unParkCar("KA40M8505")
+    const parkedSlot = newParkingLot.unParkCarByCarNumber("KA40M8505")
     expect(parkedSlot).toBe(true)
   })
   test("unpark park the car 5 , should be removed from the list", () => {
-    const parkedSlot = newParkingLot.unParkCar("KA40M8504")
+    const parkedSlot = newParkingLot.unParkCarByCarNumber("KA40M8504")
     expect(parkedSlot).toBe(true)
   })
   test("park the car that doesnt exist , should return an  error message", () => {
-    const parkedSlot = newParkingLot.unParkCar("KA40M8598")
+    const parkedSlot = newParkingLot.unParkCarByCarNumber("KA40M8598")
     expect(parkedSlot).toBe("the car is not parked ")
   })
 })

@@ -9,15 +9,17 @@ export class ParkingLot {
   parkingSlots: Slot[]
 
   createParkingLot(input: number) {
-    if (!input || input <= 0)
+    if (!input || input <= 0) {
       return "please enter the valid number to allot the maximum no of parking slots"
+    }
+
     this.maxParkingSlots = input
 
     for (let i = 0; i < input; i++) {
       this.parkingSlots.push(new Slot(i + 1))
     }
 
-    return this.parkingSlots
+    return "Created a parking lot with " + this.parkingSlots.length + " slots"
   }
 
   parkCar(carInputString: string) {
@@ -37,7 +39,7 @@ export class ParkingLot {
     }
   }
 
-  unParkCar(carNo: string) {
+  unParkCarByCarNumber(carNo: string) {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         this.parkingSlots[i].parkStatus &&
@@ -50,6 +52,7 @@ export class ParkingLot {
     }
     return "the car is not parked "
   }
+  // unParkCar
 
   getAllParkingStatus() {
     var arr = new Array()
@@ -136,10 +139,11 @@ export class ParkingLot {
 
 // const deff = parkingObj.parkCar("park KA40M8502 red")
 // console.log("abc before parking", abc)
-// const ghi = parkingObj.unParkCar("KA40M8502")
+// // const ghi = parkingObj.unParkCar("KA40M8502")
 // // const ghi = parkingObj.getSlotByCarNo("KA40M8502")
 
 // console.log("abc after unparking", abc)
 // console.log("def", def)
 // console.log("def", deff)
+// console.log(parkingObj.getAllParkingStatus())
 // console.log("ghi getSlot By CarNo", ghi)
