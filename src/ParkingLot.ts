@@ -57,7 +57,6 @@ export class ParkingLot {
 
       // TODO: can be optimized here
       for (let i = 0; i < this.parkingSlots.length; i++) {
-        // TODO: need to add element in the parking array as an object which makes it suitable to get the Number and color of the car
         if (this.parkingSlots[i] != null) {
           const temp = i + 1
           arr.push(

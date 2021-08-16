@@ -21,7 +21,7 @@ newParkingLot.parkCar({
   carNumber: "KA40M8505",
   carColor: "green",
 })
-describe("checking for the slot number based on the car number", () => {
+describe("getting the car information based on the car number", () => {
   test("should return the slot id where the car is parked", () => {
     expect(newParkingLot.getSlotByCarNo("KA40M8501")).toEqual(1)
   })
@@ -43,5 +43,20 @@ describe("getting the car data based on the car Color", () => {
         carColor: "red",
       },
     ])
+  })
+  test("getting the car data array based on the invalid car color that doesnt exist", () => {
+    expect(newParkingLot.getAllCarNumbersByColor("maroon")).toEqual(
+      "No car with the given color exist in the parking lot"
+    )
+  })
+})
+describe("Getting the slot array based on the car Color", () => {
+  test("getting the slot id array based on the  valid car color", () => {
+    expect(newParkingLot.getAllSlotsByCarColor("red")).toEqual([1, 2])
+  })
+  test("getting the slot id array based on the invalid car color", () => {
+    expect(newParkingLot.getAllSlotsByCarColor("maroon")).toEqual(
+      "No car with the given color exist in the parking lot"
+    )
   })
 })
