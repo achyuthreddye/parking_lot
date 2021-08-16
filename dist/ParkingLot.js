@@ -22,6 +22,8 @@ class ParkingLot {
         if (nextNearestStatusObj.status === true) {
             const carNumber = carInputString.split(" ")[1];
             const carColor = carInputString.split(" ")[2];
+            if (!carNumber || !carColor)
+                return "please Enter a valid car number and car Color";
             const car = new Car_1.Car(carNumber, carColor);
             this.parkingSlots[Number(nextNearestStatusObj.value)].car = car;
             this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true;

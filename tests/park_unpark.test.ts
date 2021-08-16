@@ -38,6 +38,10 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
       },
     ])
   })
+  test("send the invalid car details , should throw an error", () => {
+    const parkedSlot = newParkingLot.parkCar("park  white")
+    expect(parkedSlot).toBe("please Enter a valid car number and car Color")
+  })
   test("park the car 1 , should be parked", () => {
     const parkedSlot = newParkingLot.parkCar("park KA40M8500 white")
     expect(parkedSlot).toBe(1)
