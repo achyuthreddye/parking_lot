@@ -6,5 +6,3 @@ export class Car {
   carNumber: string
   carColor: string // TODO: implement if possible with something like enum
 }
-
-// module.exports = Car

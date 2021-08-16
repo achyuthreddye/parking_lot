@@ -87,4 +87,16 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     })
     expect(parkedSlot).toBe("Parking lot is completely filled")
   })
+  test("unpark park the car 6 , should be removed from the list", () => {
+    const parkedSlot = newParkingLot.unParkCar("KA40M8505")
+    expect(parkedSlot).toBe(true)
+  })
+  test("unpark park the car 5 , should be removed from the list", () => {
+    const parkedSlot = newParkingLot.unParkCar("KA40M8504")
+    expect(parkedSlot).toBe(true)
+  })
+  test("park the car that doesnt exist , should return an  error message", () => {
+    const parkedSlot = newParkingLot.unParkCar("KA40M8598")
+    expect(parkedSlot).toBe("the car is not parked ")
+  })
 })

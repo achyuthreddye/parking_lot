@@ -29,7 +29,17 @@ class ParkingLot {
             return nextNearestStatusObj.value;
         }
     }
-    unParkCar() { }
+    unParkCar(carNo) {
+        for (let i = 0; i < this.parkingSlots.length; i++) {
+            if (this.parkingSlots[i].parkStatus &&
+                this.parkingSlots[i].car.carNumber == carNo) {
+                this.parkingSlots[i].parkStatus = false;
+                this.parkingSlots[i].car = new Car_1.Car("", "");
+                return true;
+            }
+        }
+        return "the car is not parked ";
+    }
     getAllParkingStatus() {
         var arr = new Array();
         if (this.maxParkingSlots > 0) {
@@ -51,18 +61,38 @@ class ParkingLot {
         }
     }
     getSlotByCarNo(carNumber) {
-        console.log("car number that is passed", carNumber);
-        console.log("the given parking array is ", this.parkingSlots);
         for (let i = 0; i < this.parkingSlots.length; i++) {
             if (this.parkingSlots[i].parkStatus &&
-                this.parkingSlots[i].car.carNumber == carNumber) {
+                this.parkingSlots[i].car.carNumber === carNumber) {
                 return this.parkingSlots[i].slotId;
             }
         }
         return "car is not parked";
     }
-    getAllCarNumbersByColor() { }
-    getAllSlotsByCarColor() { }
+    getAllCarNumbersByColor(carColor) {
+        const carList = [];
+        for (let i = 0; i < this.parkingSlots.length; i++) {
+            if (this.parkingSlots[i].parkStatus &&
+                this.parkingSlots[i].car.carColor === carColor) {
+                carList.push(this.parkingSlots[i].car);
+            }
+        }
+        return carList.length > 1
+            ? carList
+            : "No car with the given color exist in the parking lot";
+    }
+    getAllSlotsByCarColor(carColor) {
+        const slotList = [];
+        for (let i = 0; i < this.parkingSlots.length; i++) {
+            if (this.parkingSlots[i].parkStatus &&
+                this.parkingSlots[i].car.carColor === carColor) {
+                slotList.push(this.parkingSlots[i].slotId);
+            }
+        }
+        return slotList.length > 1
+            ? slotList
+            : "No car with the given color exist in the parking lot";
+    }
     getNextNearestSlot(currentParkingArray) {
         if (!currentParkingArray || currentParkingArray.length === 0)
             return {
@@ -77,4 +107,20 @@ class ParkingLot {
     }
 }
 exports.ParkingLot = ParkingLot;
+const parkingObj = new ParkingLot();
+const abc = parkingObj.createParkingLot(4);
+const def = parkingObj.parkCar({
+    carNumber: "KA40M8501",
+    carColor: "red",
+});
+const deff = parkingObj.parkCar({
+    carNumber: "KA40M8502",
+    carColor: "red",
+});
+console.log("abc before parking", abc);
+const ghi = parkingObj.unParkCar("KA40M8502");
+console.log("abc after unparking", abc);
+console.log("def", def);
+console.log("def", deff);
+console.log("ghi getSlot By CarNo", ghi);
 //# sourceMappingURL=ParkingLot.js.map

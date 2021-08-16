@@ -35,7 +35,20 @@ export class ParkingLot {
     }
   }
 
-  unParkCar() {}
+  unParkCar(carNo: string) {
+    for (let i = 0; i < this.parkingSlots.length; i++) {
+      if (
+        this.parkingSlots[i].parkStatus &&
+        this.parkingSlots[i].car.carNumber == carNo
+      ) {
+        this.parkingSlots[i].parkStatus = false
+        this.parkingSlots[i].car = new Car("", "")
+        return true
+      }
+    }
+    return "the car is not parked "
+  }
+
   getAllParkingStatus() {
     var arr = new Array()
     if (this.maxParkingSlots > 0) {
@@ -63,31 +76,47 @@ export class ParkingLot {
   }
 
   getSlotByCarNo(carNumber: string) {
-    console.log("car number that is passed", carNumber)
-    console.log("the given parking array is ", this.parkingSlots)
-
-    // console.log("getSlotBycarNo", this.parkingSlots[0].car.carNumber)
-    // console.log("getSlotBycarNo ends here")
-    // const deleteme = carNumber == this.parkingSlots[0].car.carNumber
-    // console.log("deleteMe", deleteme)
-
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         this.parkingSlots[i].parkStatus &&
-        this.parkingSlots[i].car.carNumber == carNumber
+        this.parkingSlots[i].car.carNumber === carNumber
       ) {
         return this.parkingSlots[i].slotId
       }
     }
 
-    // this.parkingSlots.forEach((slot) => {
-    //   if (slot.car.carNumber === carNumber) return slot.slotId
-    // })
     return "car is not parked"
   }
 
-  getAllCarNumbersByColor() {}
-  getAllSlotsByCarColor() {}
+  getAllCarNumbersByColor(carColor: string) {
+    const carList: Car[] = []
+
+    for (let i = 0; i < this.parkingSlots.length; i++) {
+      if (
+        this.parkingSlots[i].parkStatus &&
+        this.parkingSlots[i].car.carColor === carColor
+      ) {
+        carList.push(this.parkingSlots[i].car)
+      }
+    }
+    return carList.length > 1
+      ? carList
+      : "No car with the given color exist in the parking lot"
+  }
+  getAllSlotsByCarColor(carColor: string) {
+    const slotList: number[] = []
+    for (let i = 0; i < this.parkingSlots.length; i++) {
+      if (
+        this.parkingSlots[i].parkStatus &&
+        this.parkingSlots[i].car.carColor === carColor
+      ) {
+        slotList.push(this.parkingSlots[i].slotId)
+      }
+    }
+    return slotList.length > 1
+      ? slotList
+      : "No car with the given color exist in the parking lot"
+  }
 
   getNextNearestSlot(currentParkingArray: Slot[]) {
     if (!currentParkingArray || currentParkingArray.length === 0)
@@ -102,19 +131,22 @@ export class ParkingLot {
     return { status: false, value: "Parking lot is completely filled" }
   }
 }
-// const parkingObj = new ParkingLot()
-// const abc = parkingObj.createParkingLot(4)
-// const def = parkingObj.parkCar({
-//   carNumber: "KA40M8501",
-//   carColor: "red",
-// })
-// const deff = parkingObj.parkCar({
-//   carNumber: "KA40M8502",
-//   carColor: "red",
-// })
+const parkingObj = new ParkingLot()
+const abc = parkingObj.createParkingLot(4)
+const def = parkingObj.parkCar({
+  carNumber: "KA40M8501",
+  carColor: "red",
+})
+
+const deff = parkingObj.parkCar({
+  carNumber: "KA40M8502",
+  carColor: "red",
+})
+console.log("abc before parking", abc)
+const ghi = parkingObj.unParkCar("KA40M8502")
 // const ghi = parkingObj.getSlotByCarNo("KA40M8502")
 
-// console.log("abc", abc)
-// console.log("def", def)
-// console.log("def", deff)
-// console.log("ghi getSlot By CarNo", ghi)
+console.log("abc after unparking", abc)
+console.log("def", def)
+console.log("def", deff)
+console.log("ghi getSlot By CarNo", ghi)
