@@ -39,52 +39,31 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     ])
   })
   test("park the car 1 , should be parked", () => {
-    const parkedSlot = newParkingLot.parkCar({
-      carNumber: "KA40M8500",
-      carColor: "white",
-    })
+    const parkedSlot = newParkingLot.parkCar("park KA40M8500 white")
     expect(parkedSlot).toBe(1)
   })
   test("park the car 2 , should be parked", () => {
-    const parkedSlot = newParkingLot.parkCar({
-      carNumber: "KA40M8501",
-      carColor: "red",
-    })
+    const parkedSlot = newParkingLot.parkCar("park KA40M8501 red")
     expect(parkedSlot).toBe(2)
   })
   test("park the car 3 , should be parked", () => {
-    const parkedSlot = newParkingLot.parkCar({
-      carNumber: "KA40M8502",
-      carColor: "white",
-    })
+    const parkedSlot = newParkingLot.parkCar("park KA40M8502 white")
     expect(parkedSlot).toBe(3)
   })
   test("park the car 4 , should be parked", () => {
-    const parkedSlot = newParkingLot.parkCar({
-      carNumber: "KA40M8503",
-      carColor: "green",
-    })
+    const parkedSlot = newParkingLot.parkCar("park KA40M8503 green")
     expect(parkedSlot).toBe(4)
   })
   test("park the car 5 , should be parked", () => {
-    const parkedSlot = newParkingLot.parkCar({
-      carNumber: "KA40M8504",
-      carColor: "white",
-    })
+    const parkedSlot = newParkingLot.parkCar("park KA40M8504 white")
     expect(parkedSlot).toBe(5)
   })
   test("park the car 6 , should be parked", () => {
-    const parkedSlot = newParkingLot.parkCar({
-      carNumber: "KA40M8505",
-      carColor: "blue",
-    })
+    const parkedSlot = newParkingLot.parkCar("park KA40M8505 blue")
     expect(parkedSlot).toBe(6)
   })
   test("park the car 7, should not be parked", () => {
-    const parkedSlot = newParkingLot.parkCar({
-      carNumber: "KA40M8506",
-      carColor: "blue",
-    })
+    const parkedSlot = newParkingLot.parkCar("park KA40M8506 blue")
     expect(parkedSlot).toBe("Parking lot is completely filled")
   })
   test("unpark park the car 6 , should be removed from the list", () => {

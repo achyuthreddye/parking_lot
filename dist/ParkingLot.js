@@ -10,17 +10,19 @@ class ParkingLot {
     }
     createParkingLot(input) {
         if (!input || input <= 0)
-            return "please enter the valid to allot the no of parking slots";
+            return "please enter the valid number to allot the maximum no of parking slots";
         this.maxParkingSlots = input;
         for (let i = 0; i < input; i++) {
             this.parkingSlots.push(new Slot_1.Slot(i + 1));
         }
         return this.parkingSlots;
     }
-    parkCar(carObj) {
+    parkCar(carInputString) {
         const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots);
         if (nextNearestStatusObj.status === true) {
-            const car = new Car_1.Car(carObj.carNumber, carObj.carColor);
+            const carNumber = carInputString.split(" ")[1];
+            const carColor = carInputString.split(" ")[2];
+            const car = new Car_1.Car(carNumber, carColor);
             this.parkingSlots[Number(nextNearestStatusObj.value)].car = car;
             this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true;
             return this.parkingSlots[Number(nextNearestStatusObj.value)].slotId;
@@ -107,20 +109,4 @@ class ParkingLot {
     }
 }
 exports.ParkingLot = ParkingLot;
-const parkingObj = new ParkingLot();
-const abc = parkingObj.createParkingLot(4);
-const def = parkingObj.parkCar({
-    carNumber: "KA40M8501",
-    carColor: "red",
-});
-const deff = parkingObj.parkCar({
-    carNumber: "KA40M8502",
-    carColor: "red",
-});
-console.log("abc before parking", abc);
-const ghi = parkingObj.unParkCar("KA40M8502");
-console.log("abc after unparking", abc);
-console.log("def", def);
-console.log("def", deff);
-console.log("ghi getSlot By CarNo", ghi);
 //# sourceMappingURL=ParkingLot.js.map

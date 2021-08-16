@@ -1,26 +1,12 @@
 import { ParkingLot } from "../src/ParkingLot"
 const newParkingLot = new ParkingLot()
 newParkingLot.createParkingLot(6)
-newParkingLot.parkCar({
-  carNumber: "KA40M8501",
-  carColor: "red",
-})
-newParkingLot.parkCar({
-  carNumber: "KA40M8502",
-  carColor: "red",
-})
-newParkingLot.parkCar({
-  carNumber: "KA40M8503",
-  carColor: "white",
-})
-newParkingLot.parkCar({
-  carNumber: "KA40M8504",
-  carColor: "green",
-})
-newParkingLot.parkCar({
-  carNumber: "KA40M8505",
-  carColor: "green",
-})
+newParkingLot.parkCar("park KA40M8501 red")
+newParkingLot.parkCar("park KA40M8502 red")
+newParkingLot.parkCar("park KA40M8503 white")
+newParkingLot.parkCar("park KA40M8504 green")
+newParkingLot.parkCar("park KA40M8505 green")
+
 describe("getting the car information based on the car number", () => {
   test("should return the slot id where the car is parked", () => {
     expect(newParkingLot.getSlotByCarNo("KA40M8501")).toEqual(1)

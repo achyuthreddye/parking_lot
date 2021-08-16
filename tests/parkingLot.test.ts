@@ -10,7 +10,7 @@ describe("creating the Parking lot", () => {
   test("Negative maximum parking lot size given ,passes", () => {
     const newParkingLot = new ParkingLot()
     expect(newParkingLot.createParkingLot(-45)).toEqual(
-      "please enter the valid to allot the no of parking slots"
+      "please enter the valid number to allot the maximum no of parking slots"
     )
   })
   test("valid maximum parking lot size given ,passes", () => {
@@ -39,5 +39,3 @@ describe("creating the Parking lot", () => {
     ])
   })
 })
-
-//TODO: car input data sanitization has to be performed
