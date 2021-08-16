@@ -51,10 +51,14 @@ class ParkingLot {
         }
     }
     getSlotByCarNo(carNumber) {
-        this.parkingSlots.forEach((slot) => {
-            if (slot.car.carNumber === carNumber)
-                return slot.slotId;
-        });
+        console.log("car number that is passed", carNumber);
+        console.log("the given parking array is ", this.parkingSlots);
+        for (let i = 0; i < this.parkingSlots.length; i++) {
+            if (this.parkingSlots[i].parkStatus &&
+                this.parkingSlots[i].car.carNumber == carNumber) {
+                return this.parkingSlots[i].slotId;
+            }
+        }
         return "car is not parked";
     }
     getAllCarNumbersByColor() { }
@@ -73,14 +77,4 @@ class ParkingLot {
     }
 }
 exports.ParkingLot = ParkingLot;
-const parkingObj = new ParkingLot();
-const abc = parkingObj.createParkingLot(4);
-const def = parkingObj.parkCar({
-    carNumber: "KA40M8501",
-    carColor: "red",
-});
-const ghi = parkingObj.getSlotByCarNo("KA40M8501");
-console.log("abc", abc);
-console.log("def", def);
-console.log("ghi", ghi);
 //# sourceMappingURL=ParkingLot.js.map

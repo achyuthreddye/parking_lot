@@ -19,20 +19,18 @@ export class ParkingLot {
 
     return this.parkingSlots
   }
-  //TODO: implement the car class for the object that is passed
+
   parkCar(carObj: Car) {
     const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
     if (nextNearestStatusObj.status === true) {
       const car = new Car(carObj.carNumber, carObj.carColor)
 
       // TODO:car data sanitization can be done here or when it is read from the input
-      // if (nextNearestStatusObj.value) {
+
       this.parkingSlots[Number(nextNearestStatusObj.value)].car = car
       this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true
       return this.parkingSlots[Number(nextNearestStatusObj.value)].slotId
     } else {
-      // TODO: implement the error in the getNextParking functionality itself
-      // throw new Error("Sorry, parking lot is full")
       return nextNearestStatusObj.value
     }
   }
@@ -65,9 +63,26 @@ export class ParkingLot {
   }
 
   getSlotByCarNo(carNumber: string) {
-    this.parkingSlots.forEach((slot) => {
-      if (slot.car.carNumber === carNumber) return slot.slotId
-    })
+    console.log("car number that is passed", carNumber)
+    console.log("the given parking array is ", this.parkingSlots)
+
+    // console.log("getSlotBycarNo", this.parkingSlots[0].car.carNumber)
+    // console.log("getSlotBycarNo ends here")
+    // const deleteme = carNumber == this.parkingSlots[0].car.carNumber
+    // console.log("deleteMe", deleteme)
+
+    for (let i = 0; i < this.parkingSlots.length; i++) {
+      if (
+        this.parkingSlots[i].parkStatus &&
+        this.parkingSlots[i].car.carNumber == carNumber
+      ) {
+        return this.parkingSlots[i].slotId
+      }
+    }
+
+    // this.parkingSlots.forEach((slot) => {
+    //   if (slot.car.carNumber === carNumber) return slot.slotId
+    // })
     return "car is not parked"
   }
 
@@ -87,14 +102,19 @@ export class ParkingLot {
     return { status: false, value: "Parking lot is completely filled" }
   }
 }
-const parkingObj = new ParkingLot()
-const abc = parkingObj.createParkingLot(4)
-const def = parkingObj.parkCar({
-  carNumber: "KA40M8501",
-  carColor: "red",
-})
-const ghi = parkingObj.getSlotByCarNo("KA40M8501")
+// const parkingObj = new ParkingLot()
+// const abc = parkingObj.createParkingLot(4)
+// const def = parkingObj.parkCar({
+//   carNumber: "KA40M8501",
+//   carColor: "red",
+// })
+// const deff = parkingObj.parkCar({
+//   carNumber: "KA40M8502",
+//   carColor: "red",
+// })
+// const ghi = parkingObj.getSlotByCarNo("KA40M8502")
 
-console.log("abc", abc)
-console.log("def", def)
-console.log("ghi", ghi)
+// console.log("abc", abc)
+// console.log("def", def)
+// console.log("def", deff)
+// console.log("ghi getSlot By CarNo", ghi)
