@@ -34,7 +34,7 @@ if (commandLineInputs[commandLineInputs.length - 1].endsWith(".txt")) {
         inputArray.forEach((item) => {
             processUsercommands(item);
         });
-        process.exit(1);
+        process.exit(0);
     });
 }
 else {
