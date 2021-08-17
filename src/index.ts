@@ -65,6 +65,8 @@ function processUsercommands(input: string) {
     case "slot_number_for_registration_number":
       console.log(parkingLot.getSlotByCarNo(input.split(" ")[1]))
       break
+    case "quit":
+      process.exit(0)
     default:
       console.log("Invalid command")
       break
