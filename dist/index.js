@@ -21,9 +21,26 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ParkingLot_1 = require("./ParkingLot");
 const readLine = __importStar(require("readline"));
+const fs = __importStar(require("fs"));
+const commandLineInputs = process.argv;
+let interactiveMode = false;
 const parkingLot = new ParkingLot_1.ParkingLot();
-let interactiveMode = true;
-interactiveConsole();
+if (commandLineInputs[commandLineInputs.length - 1].endsWith(".txt")) {
+    interactiveMode = false;
+    fs.readFile(commandLineInputs[2], "utf-8", (err, data) => {
+        if (err)
+            console.log("error in reading file");
+        const inputArray = data.split("\n");
+        inputArray.forEach((item) => {
+            processUsercommands(item);
+        });
+        process.exit(1);
+    });
+}
+else {
+    interactiveMode = true;
+    interactiveConsole();
+}
 function interactiveConsole() {
     var prompts = readLine.createInterface({
         input: process.stdin,

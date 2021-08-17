@@ -1,11 +1,26 @@
 import { ParkingLot } from "./ParkingLot"
 import * as readLine from "readline"
+import * as fs from "fs"
+
+const commandLineInputs = process.argv
+let interactiveMode: boolean = false
 
 const parkingLot = new ParkingLot()
-// TODO: Interactive mode or read from the file
-let interactiveMode: boolean = true
 
-interactiveConsole()
+if (commandLineInputs[commandLineInputs.length - 1].endsWith(".txt")) {
+  interactiveMode = false
+  fs.readFile(commandLineInputs[2], "utf-8", (err, data) => {
+    if (err) console.log("error in reading file")
+    const inputArray = data.split("\n")
+    inputArray.forEach((item) => {
+      processUsercommands(item)
+    })
+    process.exit(1)
+  })
+} else {
+  interactiveMode = true
+  interactiveConsole()
+}
 
 function interactiveConsole() {
   var prompts = readLine.createInterface({
@@ -53,4 +68,3 @@ function processUsercommands(input: string) {
   }
   interactiveConsole()
 }
-// processUsercomands()
