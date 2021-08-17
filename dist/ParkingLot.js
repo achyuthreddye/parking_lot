@@ -63,25 +63,22 @@ class ParkingLot {
     }
     getAllParkingStatus() {
         if (this.maxParkingSlots === 0)
-            return "Please Create a parking lot";
-        var arr = new Array();
-        if (this.maxParkingSlots > 0) {
-            arr.push("Slot No. Registration No. Color ");
-            for (let i = 0; i < this.parkingSlots.length; i++) {
-                if (this.parkingSlots[i] != null) {
-                    const temp = i + 1;
-                    arr.push(temp +
-                        ".  " +
-                        this.parkingSlots[i].car.carNumber +
-                        "  " +
-                        this.parkingSlots[i].car.carColor);
-                }
+            return ["Please Create a parking lot"];
+        var arr = [];
+        arr.push("Slot No. Registration No. Color ");
+        for (let i = 0; i < this.parkingSlots.length; i++) {
+            if (this.parkingSlots[i].parkStatus != false) {
+                const temp = i + 1;
+                arr.push(temp +
+                    ".  " +
+                    this.parkingSlots[i].car.carNumber +
+                    "  " +
+                    this.parkingSlots[i].car.carColor);
             }
-            return arr;
         }
-        else {
-            return "Parking Lot is Empty";
-        }
+        if (arr.length === 1)
+            return ["sorry the parking lot is empty"];
+        return arr;
     }
     getSlotByCarNo(carNumber) {
         if (this.maxParkingSlots === 0)
@@ -96,21 +93,21 @@ class ParkingLot {
     }
     getAllCarNumbersByColor(carColor) {
         if (this.maxParkingSlots === 0)
-            return "Please Create a parking lot";
+            return ["Please Create a parking lot"];
         const carList = [];
         for (let i = 0; i < this.parkingSlots.length; i++) {
             if (this.parkingSlots[i].parkStatus &&
                 this.parkingSlots[i].car.carColor === carColor) {
-                carList.push(this.parkingSlots[i].car);
+                carList.push(this.parkingSlots[i].car.carNumber);
             }
         }
         return carList.length > 1
             ? carList
-            : "No car with the given color exist in the parking lot";
+            : ["No car with the given color exist in the parking lot"];
     }
     getAllSlotsByCarColor(carColor) {
         if (this.maxParkingSlots === 0)
-            return "Please Create a parking lot";
+            return ["Please Create a parking lot"];
         const slotList = [];
         for (let i = 0; i < this.parkingSlots.length; i++) {
             if (this.parkingSlots[i].parkStatus &&
@@ -120,7 +117,7 @@ class ParkingLot {
         }
         return slotList.length > 1
             ? slotList
-            : "No car with the given color exist in the parking lot";
+            : ["No car with the given color exist in the parking lot"];
     }
     getNextNearestSlot(currentParkingArray) {
         if (!currentParkingArray || currentParkingArray.length === 0)
