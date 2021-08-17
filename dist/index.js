@@ -42,6 +42,11 @@ function processUsercommands(input) {
         case "create_parking_lot":
             const parkingStatus = parkingLot.createParkingLot(Number(input.split(" ")[1]));
             console.log(parkingStatus);
+            break;
+        case "park":
+            const a = parkingLot.parkCar(input);
+            console.log(a);
     }
+    interactiveConsole();
 }
 //# sourceMappingURL=index.js.map

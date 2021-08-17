@@ -23,6 +23,7 @@ export class ParkingLot {
   }
 
   parkCar(carInputString: string) {
+    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
     if (nextNearestStatusObj.status === true) {
       const carNumber: string = carInputString.split(" ")[1]
@@ -40,6 +41,7 @@ export class ParkingLot {
   }
 
   unParkCarByCarNumber(carNo: string) {
+    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         this.parkingSlots[i].parkStatus &&
@@ -55,6 +57,7 @@ export class ParkingLot {
   // unParkCar
 
   getAllParkingStatus() {
+    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     var arr = new Array()
     if (this.maxParkingSlots > 0) {
       arr.push("Slot No. Registration No. Color ")
@@ -78,6 +81,7 @@ export class ParkingLot {
   }
 
   getSlotByCarNo(carNumber: string) {
+    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         this.parkingSlots[i].parkStatus &&
@@ -91,6 +95,7 @@ export class ParkingLot {
   }
 
   getAllCarNumbersByColor(carColor: string) {
+    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     const carList: Car[] = []
 
     for (let i = 0; i < this.parkingSlots.length; i++) {
@@ -106,6 +111,7 @@ export class ParkingLot {
       : "No car with the given color exist in the parking lot"
   }
   getAllSlotsByCarColor(carColor: string) {
+    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     const slotList: number[] = []
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
@@ -121,6 +127,7 @@ export class ParkingLot {
   }
 
   getNextNearestSlot(currentParkingArray: Slot[]) {
+    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     if (!currentParkingArray || currentParkingArray.length === 0)
       return {
         status: false,
@@ -133,17 +140,3 @@ export class ParkingLot {
     return { status: false, value: "Parking lot is completely filled" }
   }
 }
-// const parkingObj = new ParkingLot()
-// const abc = parkingObj.createParkingLot(4)
-// const def = parkingObj.parkCar("park KA40M8501 red")
-
-// const deff = parkingObj.parkCar("park KA40M8502 red")
-// console.log("abc before parking", abc)
-// // const ghi = parkingObj.unParkCar("KA40M8502")
-// // const ghi = parkingObj.getSlotByCarNo("KA40M8502")
-
-// console.log("abc after unparking", abc)
-// console.log("def", def)
-// console.log("def", deff)
-// console.log(parkingObj.getAllParkingStatus())
-// console.log("ghi getSlot By CarNo", ghi)

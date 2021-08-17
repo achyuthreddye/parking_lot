@@ -19,6 +19,8 @@ class ParkingLot {
         return "Created a parking lot with " + this.parkingSlots.length + " slots";
     }
     parkCar(carInputString) {
+        if (this.maxParkingSlots === 0)
+            return "Please Create a parking lot";
         const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots);
         if (nextNearestStatusObj.status === true) {
             const carNumber = carInputString.split(" ")[1];
@@ -35,6 +37,8 @@ class ParkingLot {
         }
     }
     unParkCarByCarNumber(carNo) {
+        if (this.maxParkingSlots === 0)
+            return "Please Create a parking lot";
         for (let i = 0; i < this.parkingSlots.length; i++) {
             if (this.parkingSlots[i].parkStatus &&
                 this.parkingSlots[i].car.carNumber == carNo) {
@@ -46,6 +50,8 @@ class ParkingLot {
         return "the car is not parked ";
     }
     getAllParkingStatus() {
+        if (this.maxParkingSlots === 0)
+            return "Please Create a parking lot";
         var arr = new Array();
         if (this.maxParkingSlots > 0) {
             arr.push("Slot No. Registration No. Color ");
@@ -66,6 +72,8 @@ class ParkingLot {
         }
     }
     getSlotByCarNo(carNumber) {
+        if (this.maxParkingSlots === 0)
+            return "Please Create a parking lot";
         for (let i = 0; i < this.parkingSlots.length; i++) {
             if (this.parkingSlots[i].parkStatus &&
                 this.parkingSlots[i].car.carNumber === carNumber) {
@@ -75,6 +83,8 @@ class ParkingLot {
         return "car is not parked";
     }
     getAllCarNumbersByColor(carColor) {
+        if (this.maxParkingSlots === 0)
+            return "Please Create a parking lot";
         const carList = [];
         for (let i = 0; i < this.parkingSlots.length; i++) {
             if (this.parkingSlots[i].parkStatus &&
@@ -87,6 +97,8 @@ class ParkingLot {
             : "No car with the given color exist in the parking lot";
     }
     getAllSlotsByCarColor(carColor) {
+        if (this.maxParkingSlots === 0)
+            return "Please Create a parking lot";
         const slotList = [];
         for (let i = 0; i < this.parkingSlots.length; i++) {
             if (this.parkingSlots[i].parkStatus &&
@@ -99,6 +111,8 @@ class ParkingLot {
             : "No car with the given color exist in the parking lot";
     }
     getNextNearestSlot(currentParkingArray) {
+        if (this.maxParkingSlots === 0)
+            return "Please Create a parking lot";
         if (!currentParkingArray || currentParkingArray.length === 0)
             return {
                 status: false,

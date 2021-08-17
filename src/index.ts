@@ -29,6 +29,11 @@ function processUsercommands(input: string) {
         Number(input.split(" ")[1])
       )
       console.log(parkingStatus)
+      break
+    case "park":
+      const a = parkingLot.parkCar(input)
+      console.log(a)
   }
+  interactiveConsole()
 }
 // processUsercomands()
