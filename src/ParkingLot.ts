@@ -23,7 +23,6 @@ export class ParkingLot {
   }
 
   parkCar(carInputString: string) {
-    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
     if (nextNearestStatusObj.status === true) {
       const carNumber: string = carInputString.split(" ")[1]
@@ -34,7 +33,10 @@ export class ParkingLot {
 
       this.parkingSlots[Number(nextNearestStatusObj.value)].car = car
       this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true
-      return this.parkingSlots[Number(nextNearestStatusObj.value)].slotId
+      return (
+        "Allocated slot number:" +
+        this.parkingSlots[Number(nextNearestStatusObj.value)].slotId
+      )
     } else {
       return nextNearestStatusObj.value
     }
@@ -50,6 +52,20 @@ export class ParkingLot {
         this.parkingSlots[i].parkStatus = false
         this.parkingSlots[i].car = new Car("", "")
         return true
+      }
+    }
+    return "the car is not parked "
+  }
+  unParkCarBySlotNumber(slotNo: number) {
+    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
+    for (let i = 0; i < this.parkingSlots.length; i++) {
+      if (
+        this.parkingSlots[i].parkStatus &&
+        this.parkingSlots[i].slotId === slotNo
+      ) {
+        this.parkingSlots[i].parkStatus = false
+        this.parkingSlots[i].car = new Car("", "")
+        return "Slot number " + this.parkingSlots[i].slotId + " is free"
       }
     }
     return "the car is not parked "
@@ -127,7 +143,6 @@ export class ParkingLot {
   }
 
   getNextNearestSlot(currentParkingArray: Slot[]) {
-    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     if (!currentParkingArray || currentParkingArray.length === 0)
       return {
         status: false,

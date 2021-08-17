@@ -44,8 +44,11 @@ function processUsercommands(input) {
             console.log(parkingStatus);
             break;
         case "park":
-            const a = parkingLot.parkCar(input);
-            console.log(a);
+            console.log(parkingLot.parkCar(input));
+            break;
+        case "leave":
+            console.log(parkingLot.unParkCarBySlotNumber(Number(input.split(" ")[1])));
+            break;
     }
     interactiveConsole();
 }

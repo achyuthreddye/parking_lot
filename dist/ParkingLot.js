@@ -19,8 +19,6 @@ class ParkingLot {
         return "Created a parking lot with " + this.parkingSlots.length + " slots";
     }
     parkCar(carInputString) {
-        if (this.maxParkingSlots === 0)
-            return "Please Create a parking lot";
         const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots);
         if (nextNearestStatusObj.status === true) {
             const carNumber = carInputString.split(" ")[1];
@@ -30,7 +28,8 @@ class ParkingLot {
             const car = new Car_1.Car(carNumber, carColor);
             this.parkingSlots[Number(nextNearestStatusObj.value)].car = car;
             this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true;
-            return this.parkingSlots[Number(nextNearestStatusObj.value)].slotId;
+            return ("Allocated slot number:" +
+                this.parkingSlots[Number(nextNearestStatusObj.value)].slotId);
         }
         else {
             return nextNearestStatusObj.value;
@@ -45,6 +44,19 @@ class ParkingLot {
                 this.parkingSlots[i].parkStatus = false;
                 this.parkingSlots[i].car = new Car_1.Car("", "");
                 return true;
+            }
+        }
+        return "the car is not parked ";
+    }
+    unParkCarBySlotNumber(slotNo) {
+        if (this.maxParkingSlots === 0)
+            return "Please Create a parking lot";
+        for (let i = 0; i < this.parkingSlots.length; i++) {
+            if (this.parkingSlots[i].parkStatus &&
+                this.parkingSlots[i].slotId === slotNo) {
+                this.parkingSlots[i].parkStatus = false;
+                this.parkingSlots[i].car = new Car_1.Car("", "");
+                return "Slot number " + this.parkingSlots[i].slotId + " is free";
             }
         }
         return "the car is not parked ";
@@ -111,8 +123,6 @@ class ParkingLot {
             : "No car with the given color exist in the parking lot";
     }
     getNextNearestSlot(currentParkingArray) {
-        if (this.maxParkingSlots === 0)
-            return "Please Create a parking lot";
         if (!currentParkingArray || currentParkingArray.length === 0)
             return {
                 status: false,

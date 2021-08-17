@@ -13,27 +13,27 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
   })
   test("park the car 1 , should be parked", () => {
     const parkedSlot = newParkingLot.parkCar("park KA40M8500 white")
-    expect(parkedSlot).toBe(1)
+    expect(parkedSlot).toBe("Allocated slot number:" + 1)
   })
   test("park the car 2 , should be parked", () => {
     const parkedSlot = newParkingLot.parkCar("park KA40M8501 red")
-    expect(parkedSlot).toBe(2)
+    expect(parkedSlot).toBe("Allocated slot number:" + 2)
   })
   test("park the car 3 , should be parked", () => {
     const parkedSlot = newParkingLot.parkCar("park KA40M8502 white")
-    expect(parkedSlot).toBe(3)
+    expect(parkedSlot).toBe("Allocated slot number:" + 3)
   })
   test("park the car 4 , should be parked", () => {
     const parkedSlot = newParkingLot.parkCar("park KA40M8503 green")
-    expect(parkedSlot).toBe(4)
+    expect(parkedSlot).toBe("Allocated slot number:" + 4)
   })
   test("park the car 5 , should be parked", () => {
     const parkedSlot = newParkingLot.parkCar("park KA40M8504 white")
-    expect(parkedSlot).toBe(5)
+    expect(parkedSlot).toBe("Allocated slot number:" + 5)
   })
   test("park the car 6 , should be parked", () => {
     const parkedSlot = newParkingLot.parkCar("park KA40M8505 blue")
-    expect(parkedSlot).toBe(6)
+    expect(parkedSlot).toBe("Allocated slot number:" + 6)
   })
   test("park the car 7, should not be parked", () => {
     const parkedSlot = newParkingLot.parkCar("park KA40M8506 blue")
@@ -46,6 +46,10 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
   test("unpark park the car 5 , should be removed from the list", () => {
     const parkedSlot = newParkingLot.unParkCarByCarNumber("KA40M8504")
     expect(parkedSlot).toBe(true)
+  })
+  test("unpark park the slot 6 , should be removed from the list", () => {
+    const parkedSlot = newParkingLot.unParkCarBySlotNumber(2)
+    expect(parkedSlot).toBe("Slot number 2 is free")
   })
   test("park the car that doesnt exist , should return an  error message", () => {
     const parkedSlot = newParkingLot.unParkCarByCarNumber("KA40M8598")
