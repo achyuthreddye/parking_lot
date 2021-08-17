@@ -69,3 +69,4 @@ Slot No.  Registration No Color
 - Implementing the postgres database for the app
 - using the orm to use the database
 - changing the loops to iterables
+- sanitizing the car input data and maintaining the list possible colors just to to be safe about the colors that are added by the users
