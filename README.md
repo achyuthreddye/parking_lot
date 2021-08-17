@@ -63,3 +63,9 @@ Slot No.  Registration No Color
 - **exit**: `quit` will quit the application and return to the console.
 
 > **NOTE: Any commands which are not mentioned above will throw an error: `invalid command`**
+
+## Things that I have to Work on
+
+- Implementing the postgres database for the app
+- using the orm to use the database
+- changing the loops to iterables
