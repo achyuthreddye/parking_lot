@@ -70,7 +70,6 @@ export class ParkingLot {
     }
     return "the car is not parked "
   }
-  // unParkCar
 
   getAllParkingStatus() {
     if (this.maxParkingSlots === 0) return ["Please Create a parking lot"]

@@ -7,6 +7,19 @@ newParkingLot.parkCar("park KA40M8503 white")
 newParkingLot.parkCar("park KA40M8504 green")
 newParkingLot.parkCar("park KA40M8505 green")
 
+describe("getting the status of the parkign lot", () => {
+  test("getting the  list of all the parking cars in the parkign lot", () => {
+    expect(newParkingLot.getAllParkingStatus()).toEqual([
+      "Slot No. Registration No. Color ",
+      "1.  KA40M8501  red",
+      "2.  KA40M8502  red",
+      "3.  KA40M8503  white",
+      "4.  KA40M8504  green",
+      "5.  KA40M8505  green",
+    ])
+  })
+})
+
 describe("getting the car information based on the car number", () => {
   test("should return the slot id where the car is parked", () => {
     expect(newParkingLot.getSlotByCarNo("KA40M8501")).toEqual(1)
