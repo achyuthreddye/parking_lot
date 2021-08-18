@@ -29,7 +29,8 @@ export class ParkingLot {
       const carColor: string = carInputString.split(" ")[2]
       if (!carNumber || !carColor)
         return "please Enter a valid car number and car Color"
-      const car = new Car(carNumber, carColor)
+      const car = new Car()
+      car.createCar(carNumber, carColor)
 
       this.parkingSlots[Number(nextNearestStatusObj.value)].parkCar(car)
 
@@ -51,7 +52,7 @@ export class ParkingLot {
         this.parkingSlots[i].car.carNumber == carNo
       ) {
         this.parkingSlots[i].parkStatus = false
-        this.parkingSlots[i].car = new Car("", "")
+        this.parkingSlots[i].car = new Car()
         return true
       }
     }
@@ -65,7 +66,7 @@ export class ParkingLot {
         this.parkingSlots[i].slotId === slotNo
       ) {
         this.parkingSlots[i].parkStatus = false
-        this.parkingSlots[i].car = new Car("", "")
+        this.parkingSlots[i].car = new Car()
         return "Slot number " + this.parkingSlots[i].slotId + " is free"
       }
     }

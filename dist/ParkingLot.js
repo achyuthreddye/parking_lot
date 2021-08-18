@@ -25,7 +25,8 @@ class ParkingLot {
             const carColor = carInputString.split(" ")[2];
             if (!carNumber || !carColor)
                 return "please Enter a valid car number and car Color";
-            const car = new Car_1.Car(carNumber, carColor);
+            const car = new Car_1.Car();
+            car.createCar(carNumber, carColor);
             this.parkingSlots[Number(nextNearestStatusObj.value)].parkCar(car);
             this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true;
             return ("Allocated slot number:" +
@@ -42,7 +43,7 @@ class ParkingLot {
             if (this.parkingSlots[i].parkStatus &&
                 this.parkingSlots[i].car.carNumber == carNo) {
                 this.parkingSlots[i].parkStatus = false;
-                this.parkingSlots[i].car = new Car_1.Car("", "");
+                this.parkingSlots[i].car = new Car_1.Car();
                 return true;
             }
         }
@@ -55,7 +56,7 @@ class ParkingLot {
             if (this.parkingSlots[i].parkStatus &&
                 this.parkingSlots[i].slotId === slotNo) {
                 this.parkingSlots[i].parkStatus = false;
-                this.parkingSlots[i].car = new Car_1.Car("", "");
+                this.parkingSlots[i].car = new Car_1.Car();
                 return "Slot number " + this.parkingSlots[i].slotId + " is free";
             }
         }
