@@ -31,7 +31,8 @@ export class ParkingLot {
         return "please Enter a valid car number and car Color"
       const car = new Car(carNumber, carColor)
 
-      this.parkingSlots[Number(nextNearestStatusObj.value)].car = car
+      this.parkingSlots[Number(nextNearestStatusObj.value)].parkCar(car)
+
       this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true
       return (
         "Allocated slot number:" +
