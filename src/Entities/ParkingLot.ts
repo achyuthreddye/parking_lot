@@ -18,7 +18,6 @@ export class ParkingLot {
     for (let i = 0; i < input; i++) {
       this.parkingSlots.push(new Slot(i + 1))
     }
-    console.log(this.parkingSlots)
 
     return "Created a parking lot with " + this.parkingSlots.length + " slots"
   }
@@ -45,14 +44,8 @@ export class ParkingLot {
         return "please Enter a valid car number and car Color"
       const car = new Car()
       car.create(carNumber, carColor)
-      console.log("hey")
 
-      console.log(nextNearestStatusObj.value)
-      console.log("bye")
-
-      // this.parkingSlots[Number(nextNearestStatusObj.value)].park(car)
       this.parkingSlots[Number(nextNearestStatusObj.value)].park(car)
-      console.log("Afte parking", this.parkingSlots)
 
       return (
         "Allocated slot number:" +

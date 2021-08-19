@@ -29,7 +29,7 @@ slot5.car = car5
 
 const parkingLotWithEmptySpace: Slot[] = [slot1, slot2, slot3, slot4]
 
-const parkingLotWithOutEmptySpace: Slot[] = [slot1, slot2, slot5, slot4]
+// const parkingLotWithOutEmptySpace: Slot[] = [slot1, slot2, slot5, slot4]
 
 describe("getting the nearest parking lot in the given parking array returns the index of the parking lot", () => {
   test("invalid current parking array is given", () => {
