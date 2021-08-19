@@ -1,4 +1,4 @@
-import { ParkingLot } from "../src/ParkingLot"
+import { ParkingLot } from "../src/Entities/ParkingLot"
 
 describe("creating the Parking lot", () => {
   test("Negative maximum parking lot size given ,passes", () => {

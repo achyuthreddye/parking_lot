@@ -1,4 +1,4 @@
-import { ParkingLot } from "../src/ParkingLot"
+import { ParkingLot } from "../src/Entities/ParkingLot"
 
 describe("Creating a new Parking lot and parking the cars in the parking slots", () => {
   const newParkingLot = new ParkingLot()

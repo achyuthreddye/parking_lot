@@ -1,4 +1,4 @@
-import { ParkingLot } from "./ParkingLot"
+import { ParkingLot } from "./Entities/ParkingLot"
 
 export function processUsercommands(input: string, parkingLot: ParkingLot) {
   const userCommand: string = input.split(" ")[0]

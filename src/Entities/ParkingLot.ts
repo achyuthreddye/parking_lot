@@ -18,8 +18,22 @@ export class ParkingLot {
     for (let i = 0; i < input; i++) {
       this.parkingSlots.push(new Slot(i + 1))
     }
+    console.log(this.parkingSlots)
 
     return "Created a parking lot with " + this.parkingSlots.length + " slots"
+  }
+  getNextNearestSlot(currentParkingArray: Slot[]) {
+    if (!currentParkingArray || currentParkingArray.length === 0)
+      return {
+        status: false,
+        value: "Please enter the valid current parking array",
+      }
+    for (let i = 0; i < currentParkingArray.length; i++) {
+      if (currentParkingArray[i].isEmpty())
+        // return { status: true, value: currentParkingArray[i].slotId }
+        return { status: true, value: i }
+    }
+    return { status: false, value: "Parking lot is completely filled" }
   }
 
   parkCar(carInputString: string) {
@@ -31,8 +45,14 @@ export class ParkingLot {
         return "please Enter a valid car number and car Color"
       const car = new Car()
       car.create(carNumber, carColor)
+      console.log("hey")
 
+      console.log(nextNearestStatusObj.value)
+      console.log("bye")
+
+      // this.parkingSlots[Number(nextNearestStatusObj.value)].park(car)
       this.parkingSlots[Number(nextNearestStatusObj.value)].park(car)
+      console.log("Afte parking", this.parkingSlots)
 
       return (
         "Allocated slot number:" +
@@ -132,17 +152,5 @@ export class ParkingLot {
     return slotList.length > 1
       ? slotList
       : ["No car with the given color exist in the parking lot"]
-  }
-
-  getNextNearestSlot(currentParkingArray: Slot[]) {
-    if (!currentParkingArray || currentParkingArray.length === 0)
-      return {
-        status: false,
-        value: "Please enter the valid current parking array",
-      }
-    for (let i = 0; i < currentParkingArray.length; i++) {
-      if (currentParkingArray[i].isEmpty()) return { status: true, value: i }
-    }
-    return { status: false, value: "Parking lot is completely filled" }
   }
 }

@@ -1,4 +1,4 @@
-import { ParkingLot } from "../src/ParkingLot"
+import { ParkingLot } from "../src/Entities/ParkingLot"
 const newParkingLot = new ParkingLot()
 newParkingLot.createParkingLot(6)
 newParkingLot.parkCar("park KA40M8501 red")
@@ -8,7 +8,7 @@ newParkingLot.parkCar("park KA40M8504 green")
 newParkingLot.parkCar("park KA40M8505 green")
 
 describe("getting the status of the parkign lot", () => {
-  test("getting the  list of all the parking cars in the parkign lot", () => {
+  test("getting the  list of all the parking cars in the parking lot", () => {
     expect(newParkingLot.getAllParkingStatus()).toEqual([
       "Slot No. Registration No. Color ",
       "1.  KA40M8501  red",
