@@ -30,11 +30,10 @@ export class ParkingLot {
       if (!carNumber || !carColor)
         return "please Enter a valid car number and car Color"
       const car = new Car()
-      car.createCar(carNumber, carColor)
+      car.create(carNumber, carColor)
 
-      this.parkingSlots[Number(nextNearestStatusObj.value)].parkCar(car)
+      this.parkingSlots[Number(nextNearestStatusObj.value)].park(car)
 
-      this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true
       return (
         "Allocated slot number:" +
         this.parkingSlots[Number(nextNearestStatusObj.value)].slotId
@@ -47,12 +46,8 @@ export class ParkingLot {
   unParkCarByCarNumber(carNo: string) {
     if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (
-        this.parkingSlots[i].parkStatus &&
-        this.parkingSlots[i].car.carNumber == carNo
-      ) {
-        this.parkingSlots[i].parkStatus = false
-        this.parkingSlots[i].car = new Car()
+      if (this.parkingSlots[i].car.carNumber == carNo) {
+        this.parkingSlots[i].unPark()
         return true
       }
     }
@@ -61,11 +56,7 @@ export class ParkingLot {
   unParkCarBySlotNumber(slotNo: number) {
     if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (
-        this.parkingSlots[i].parkStatus &&
-        this.parkingSlots[i].slotId === slotNo
-      ) {
-        this.parkingSlots[i].parkStatus = false
+      if (this.parkingSlots[i].slotId === slotNo) {
         this.parkingSlots[i].car = new Car()
         return "Slot number " + this.parkingSlots[i].slotId + " is free"
       }
@@ -80,7 +71,7 @@ export class ParkingLot {
     arr.push("Slot No. Registration No. Color ")
 
     for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (this.parkingSlots[i].parkStatus != false) {
+      if (!this.parkingSlots[i].isEmpty()) {
         const temp = i + 1
         arr.push(
           temp +
@@ -99,7 +90,7 @@ export class ParkingLot {
     if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
-        this.parkingSlots[i].parkStatus &&
+        !this.parkingSlots[i].isEmpty() &&
         this.parkingSlots[i].car.carNumber === carNumber
       ) {
         return this.parkingSlots[i].slotId
@@ -115,8 +106,9 @@ export class ParkingLot {
 
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
-        this.parkingSlots[i].parkStatus &&
-        this.parkingSlots[i].car.carColor === carColor
+        !this.parkingSlots[i].isEmpty() &&
+        this.parkingSlots[i].car.carColor.toLowerCase() ===
+          carColor.toLowerCase()
       ) {
         carList.push(this.parkingSlots[i].car.carNumber)
       }
@@ -130,8 +122,9 @@ export class ParkingLot {
     const slotList: number[] = []
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
-        this.parkingSlots[i].parkStatus &&
-        this.parkingSlots[i].car.carColor === carColor
+        !this.parkingSlots[i].isEmpty() &&
+        this.parkingSlots[i].car.carColor.toLowerCase() ===
+          carColor.toLowerCase()
       ) {
         slotList.push(this.parkingSlots[i].slotId)
       }
@@ -148,8 +141,7 @@ export class ParkingLot {
         value: "Please enter the valid current parking array",
       }
     for (let i = 0; i < currentParkingArray.length; i++) {
-      if (currentParkingArray[i].parkStatus === false)
-        return { status: true, value: i }
+      if (currentParkingArray[i].isEmpty()) return { status: true, value: i }
     }
     return { status: false, value: "Parking lot is completely filled" }
   }

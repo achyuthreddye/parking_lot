@@ -26,9 +26,8 @@ class ParkingLot {
             if (!carNumber || !carColor)
                 return "please Enter a valid car number and car Color";
             const car = new Car_1.Car();
-            car.createCar(carNumber, carColor);
-            this.parkingSlots[Number(nextNearestStatusObj.value)].parkCar(car);
-            this.parkingSlots[Number(nextNearestStatusObj.value)].parkStatus = true;
+            car.create(carNumber, carColor);
+            this.parkingSlots[Number(nextNearestStatusObj.value)].park(car);
             return ("Allocated slot number:" +
                 this.parkingSlots[Number(nextNearestStatusObj.value)].slotId);
         }
@@ -40,10 +39,8 @@ class ParkingLot {
         if (this.maxParkingSlots === 0)
             return "Please Create a parking lot";
         for (let i = 0; i < this.parkingSlots.length; i++) {
-            if (this.parkingSlots[i].parkStatus &&
-                this.parkingSlots[i].car.carNumber == carNo) {
-                this.parkingSlots[i].parkStatus = false;
-                this.parkingSlots[i].car = new Car_1.Car();
+            if (this.parkingSlots[i].car.carNumber == carNo) {
+                this.parkingSlots[i].unPark();
                 return true;
             }
         }
@@ -53,9 +50,7 @@ class ParkingLot {
         if (this.maxParkingSlots === 0)
             return "Please Create a parking lot";
         for (let i = 0; i < this.parkingSlots.length; i++) {
-            if (this.parkingSlots[i].parkStatus &&
-                this.parkingSlots[i].slotId === slotNo) {
-                this.parkingSlots[i].parkStatus = false;
+            if (this.parkingSlots[i].slotId === slotNo) {
                 this.parkingSlots[i].car = new Car_1.Car();
                 return "Slot number " + this.parkingSlots[i].slotId + " is free";
             }
@@ -68,7 +63,7 @@ class ParkingLot {
         var arr = [];
         arr.push("Slot No. Registration No. Color ");
         for (let i = 0; i < this.parkingSlots.length; i++) {
-            if (this.parkingSlots[i].parkStatus != false) {
+            if (!this.parkingSlots[i].isEmpty()) {
                 const temp = i + 1;
                 arr.push(temp +
                     ".  " +
@@ -85,7 +80,7 @@ class ParkingLot {
         if (this.maxParkingSlots === 0)
             return "Please Create a parking lot";
         for (let i = 0; i < this.parkingSlots.length; i++) {
-            if (this.parkingSlots[i].parkStatus &&
+            if (!this.parkingSlots[i].isEmpty() &&
                 this.parkingSlots[i].car.carNumber === carNumber) {
                 return this.parkingSlots[i].slotId;
             }
@@ -97,8 +92,9 @@ class ParkingLot {
             return ["Please Create a parking lot"];
         const carList = [];
         for (let i = 0; i < this.parkingSlots.length; i++) {
-            if (this.parkingSlots[i].parkStatus &&
-                this.parkingSlots[i].car.carColor === carColor) {
+            if (!this.parkingSlots[i].isEmpty() &&
+                this.parkingSlots[i].car.carColor.toLowerCase() ===
+                    carColor.toLowerCase()) {
                 carList.push(this.parkingSlots[i].car.carNumber);
             }
         }
@@ -111,8 +107,9 @@ class ParkingLot {
             return ["Please Create a parking lot"];
         const slotList = [];
         for (let i = 0; i < this.parkingSlots.length; i++) {
-            if (this.parkingSlots[i].parkStatus &&
-                this.parkingSlots[i].car.carColor === carColor) {
+            if (!this.parkingSlots[i].isEmpty() &&
+                this.parkingSlots[i].car.carColor.toLowerCase() ===
+                    carColor.toLowerCase()) {
                 slotList.push(this.parkingSlots[i].slotId);
             }
         }
@@ -127,7 +124,7 @@ class ParkingLot {
                 value: "Please enter the valid current parking array",
             };
         for (let i = 0; i < currentParkingArray.length; i++) {
-            if (currentParkingArray[i].parkStatus === false)
+            if (currentParkingArray[i].isEmpty())
                 return { status: true, value: i };
         }
         return { status: false, value: "Parking lot is completely filled" };

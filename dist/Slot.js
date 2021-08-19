@@ -1,15 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Slot = void 0;
+const Car_1 = require("./Car");
 class Slot {
     constructor(slotId) {
-        this.parkStatus = false;
         this.slotId = slotId;
+        this.car = new Car_1.Car();
     }
-    parkCar(carTobeParked) {
+    park(carTobeParked) {
         this.car = carTobeParked;
     }
-    unParkCar() {
+    unPark() {
+        this.car = new Car_1.Car();
+    }
+    isEmpty() {
+        return this.car.carColor === undefined && this.car.carNumber === undefined;
     }
 }
 exports.Slot = Slot;

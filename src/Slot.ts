@@ -2,17 +2,20 @@ import { Car } from "./Car"
 
 export class Slot {
   constructor(slotId: number) {
-    this.parkStatus = false
     this.slotId = slotId
+    this.car = new Car()
   }
-  parkStatus: boolean
+
   car: Car
   slotId: number
 
-  parkCar(carTobeParked: Car) {
+  park(carTobeParked: Car) {
     this.car = carTobeParked
   }
-  unParkCar() {
-    // this.car = null
+  unPark() {
+    this.car = new Car()
+  }
+  isEmpty() {
+    return this.car.carColor === undefined && this.car.carNumber === undefined
   }
 }

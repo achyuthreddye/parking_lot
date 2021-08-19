@@ -1,6 +1,7 @@
 import { ParkingLot } from "./ParkingLot"
 import * as readLine from "readline"
 import * as fs from "fs"
+// import { processUsercommands } from "./processUserCommands"
 
 const commandLineInputs = process.argv
 let interactiveMode: boolean = false
@@ -13,6 +14,7 @@ if (commandLineInputs[commandLineInputs.length - 1].endsWith(".txt")) {
     if (err) console.log("error in reading file")
     const inputArray = data.split("\n")
     inputArray.forEach((item) => {
+      // processUsercommands(item, parkingLot)
       processUsercommands(item)
     })
     process.exit(0)
@@ -30,8 +32,11 @@ function interactiveConsole() {
   })
   if (interactiveMode) {
     prompts.question("Input: ", function (data: string) {
+      // processUsercommands(data, parkingLot)
       processUsercommands(data)
+      // interactiveConsole()
     })
+    // interactiveConsole()
   }
 }
 
