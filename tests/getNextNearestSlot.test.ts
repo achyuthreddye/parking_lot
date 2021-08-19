@@ -29,8 +29,6 @@ slot5.car = car5
 
 const parkingLotWithEmptySpace: Slot[] = [slot1, slot2, slot3, slot4]
 
-// const parkingLotWithOutEmptySpace: Slot[] = [slot1, slot2, slot5, slot4]
-
 describe("getting the nearest parking lot in the given parking array returns the index of the parking lot", () => {
   test("invalid current parking array is given", () => {
     const newParkingLot = new ParkingLot()
@@ -50,14 +48,4 @@ describe("getting the nearest parking lot in the given parking array returns the
       value: 2,
     })
   })
-  // test("valid current parking array is valid and no empty spaces, passes", () => {
-  //   const newParkingLot = new ParkingLot()
-
-  //   expect(
-  //     newParkingLot.getNextNearestSlot(parkingLotWithOutEmptySpace)
-  //   ).toEqual({
-  //     status: false,
-  //     value: "Parking lot is completely filled",
-  //   })
-  // })
 })

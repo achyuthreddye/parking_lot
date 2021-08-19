@@ -10,7 +10,10 @@ export class ParkingLot {
 
   createParkingLot(input: number) {
     if (!input || input <= 0) {
-      return "please enter the valid number to allot the maximum no of parking slots"
+      return {
+        status: "failure",
+        message: "Invalid Input",
+      }
     }
 
     this.maxParkingSlots = input
@@ -18,8 +21,10 @@ export class ParkingLot {
     for (let i = 0; i < input; i++) {
       this.parkingSlots.push(new Slot(i + 1))
     }
-
-    return "Created a parking lot with " + this.parkingSlots.length + " slots"
+    return {
+      status: "success",
+      message: this.parkingSlots.length,
+    }
   }
   getNextNearestSlot(currentParkingArray: Slot[]) {
     if (!currentParkingArray || currentParkingArray.length === 0)

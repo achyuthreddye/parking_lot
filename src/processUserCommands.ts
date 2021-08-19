@@ -5,7 +5,17 @@ export function processUsercommands(input: string, parkingLot: ParkingLot) {
 
   switch (userCommand) {
     case "create_parking_lot":
-      console.log(parkingLot.createParkingLot(Number(input.split(" ")[1])))
+      const createParkLotStatus = parkingLot.createParkingLot(
+        Number(input.split(" ")[1])
+      )
+      if (createParkLotStatus.status) {
+        console.log("Created a parking lot with ", createParkLotStatus.message)
+      } else {
+        console.log(
+          "please enter the valid number to allot the maximum no of parking slots"
+        )
+      }
+
       break
     case "park":
       console.log(parkingLot.parkCar(input))

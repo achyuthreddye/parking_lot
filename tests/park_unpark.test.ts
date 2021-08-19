@@ -5,7 +5,10 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
 
   test("create the new parking lot", () => {
     const totalParkings = newParkingLot.createParkingLot(6)
-    expect(totalParkings).toEqual("Created a parking lot with 6 slots")
+    expect(totalParkings).toEqual({
+      status: "success",
+      message: 6,
+    })
   })
   test("send the invalid car details , should throw an error", () => {
     const parkedSlot = newParkingLot.parkCar("park  white")
