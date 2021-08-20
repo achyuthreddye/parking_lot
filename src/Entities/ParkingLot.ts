@@ -2,10 +2,10 @@ import { Car } from "./Car"
 import { Slot } from "./Slot"
 export class ParkingLot {
   constructor() {
-    this.maxParkingSlots = 0
+    this.parkingLotSize = 0
     this.parkingSlots = new Array()
   }
-  maxParkingSlots: number
+  parkingLotSize: number
   parkingSlots: Slot[]
 
   createParkingLot(input: number) {
@@ -16,7 +16,7 @@ export class ParkingLot {
       }
     }
 
-    this.maxParkingSlots = input
+    this.parkingLotSize = input
 
     for (let i = 0; i < input; i++) {
       this.parkingSlots.push(new Slot(i + 1))
@@ -56,7 +56,6 @@ export class ParkingLot {
   }
 
   unParkCarByCarNumber(carNo: string) {
-    if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (this.parkingSlots[i].car.carNumber == carNo) {
         this.parkingSlots[i].unPark()
@@ -66,7 +65,6 @@ export class ParkingLot {
     return "the car is not parked "
   }
   unParkCarBySlotNumber(slotNo: number) {
-    // if (this.maxParkingSlots === 0) return "Please Create a parking lot"
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (this.parkingSlots[i].slotId === slotNo) {
         this.parkingSlots[i].car = new Car()

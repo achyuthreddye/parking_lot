@@ -98,5 +98,5 @@ export function getAllCarNumbersByColor(color: string, parkingLot: ParkingLot) {
 function checkIfValidParkingLot(parkingLot: ParkingLot) {
   console.log("Please Enter a valid Parking Lot")
 
-  return parkingLot.maxParkingSlots === 0
+  return parkingLot.parkingLotSize === 0
 }
