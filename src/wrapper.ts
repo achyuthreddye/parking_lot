@@ -50,7 +50,7 @@ export function getAllParkingStatus(parkingLot: ParkingLot) {
   if (parkedCarsArray.length === 0) {
     console.log("sorry the parking lot is empty")
   } else {
-    console.log("Slot No   Registration Number   Color hehr")
+    console.log("Slot No   Registration Number   Colorcle")
     console.log(parkedCarsArray.join("\n"))
   }
 }
@@ -96,7 +96,10 @@ export function getAllCarNumbersByColor(color: string, parkingLot: ParkingLot) {
 }
 
 function checkIfValidParkingLot(parkingLot: ParkingLot) {
-  console.log("Please Enter a valid Parking Lot")
-
-  return parkingLot.parkingLotSize === 0
+  if (parkingLot.parkingLotSize === 0) {
+    console.log("Please Enter a valid Parking Lot")
+    return true
+  } else {
+    return false
+  }
 }
