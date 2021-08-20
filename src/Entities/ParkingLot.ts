@@ -33,6 +33,8 @@ export class ParkingLot {
         value: "Please enter the valid current parking array",
       }
     for (let i = 0; i < currentParkingArray.length; i++) {
+      console.log("i value ", i)
+
       if (currentParkingArray[i].isEmpty()) return { status: true, value: i }
     }
     return { status: false, value: "Parking lot is completely filled" }
@@ -40,6 +42,8 @@ export class ParkingLot {
 
   parkCar(carInputString: string) {
     const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
+    console.log("nextNearestStatusObj", nextNearestStatusObj)
+
     if (nextNearestStatusObj.status === true) {
       const carNumber: string = carInputString.split(" ")[1]
       const carColor: string = carInputString.split(" ")[2]
@@ -48,6 +52,11 @@ export class ParkingLot {
       if (!carNumber || !carColor)
         return { status: "failure", message: "InvalidInput" }
       this.parkingSlots[Number(nextNearestStatusObj.value)].park(carObj)
+    } else {
+      return {
+        status: "failure",
+        message: "ParkingLotFilled",
+      }
     }
     return {
       status: "success",

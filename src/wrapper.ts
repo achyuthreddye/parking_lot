@@ -18,11 +18,13 @@ export function createParkingLot(parkingLot: ParkingLot, lotSize: number) {
 export function parkCar(parkingLot: ParkingLot, input: string) {
   if (checkIfValidParkingLot(parkingLot)) return
   const parkCarStatus = parkingLot.parkCar(input)
-  if (
-    parkCarStatus.status === "failure" &&
-    parkCarStatus.message === "InvalidInput"
-  ) {
-    console.log("Please Enter a valid car number and car Color")
+  if (parkCarStatus.status === "failure") {
+    if (parkCarStatus.message === "InvalidInput") {
+      console.log("Please Enter a valid car number and car Color")
+    }
+    if (parkCarStatus.message === "ParkingLotFilled") {
+      console.log("Sorry, Parking Lot is filled")
+    }
   } else {
     console.log("Allocated slot number:", parkCarStatus.message)
   }
