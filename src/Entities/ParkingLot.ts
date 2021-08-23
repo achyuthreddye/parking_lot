@@ -35,6 +35,7 @@ export class ParkingLot {
         status: false,
         value: "Please enter the valid current parking array",
       }
+
     for (let i = 0; i < currentParkingArray.length; i++) {
       if (currentParkingArray[i].isEmpty()) return { status: true, value: i }
     }
@@ -46,15 +47,15 @@ export class ParkingLot {
 
     if (nextNearestStatusObj.status === true) {
       this.parkingSlots[Number(nextNearestStatusObj.value)].park(carObj)
+      return {
+        status: "success",
+        message: this.parkingSlots[Number(nextNearestStatusObj.value)].slotId,
+      }
     } else {
       return {
         status: "failure",
         message: "ParkingLotFilled",
       }
-    }
-    return {
-      status: "success",
-      message: this.parkingSlots[Number(nextNearestStatusObj.value)].slotId,
     }
   }
 
