@@ -2,10 +2,9 @@ import { Car } from "./Car"
 import { Slot } from "./Slot"
 export class ParkingLot {
   constructor() {
-    this.parkingLotSize = 0
     this.parkingSlots = new Array()
   }
-  parkingLotSize: number
+
   parkingSlots: Slot[]
 
   createParkingLot(input: number) {
@@ -15,8 +14,6 @@ export class ParkingLot {
         message: "Invalid Input",
       }
     }
-
-    this.parkingLotSize = input
 
     for (let i = 0; i < input; i++) {
       this.parkingSlots.push(new Slot(i + 1))

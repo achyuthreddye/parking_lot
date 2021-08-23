@@ -8,7 +8,7 @@ export function fileConsole(
 ) {
   if (!fs.existsSync(commandLineInputs[2])) {
     console.log(
-      "file doesn't exists Please enter the valid filename. Using ./fileInputs.txt is encouraged"
+      "file doesn't exists Please enter the valid filename. sing ./fileInputs.txt is encouraged"
     )
     return
   }

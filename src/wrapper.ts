@@ -2,6 +2,7 @@ import { ParkingLot } from "./Entities/ParkingLot"
 
 export function createParkingLot(parkingLot: ParkingLot, lotSize: number) {
   const createParkLotStatus = parkingLot.createParkingLot(lotSize)
+
   if (createParkLotStatus.status === "success") {
     console.log(
       "Created a parking lot with ",
@@ -19,6 +20,8 @@ export function parkCar(parkingLot: ParkingLot, input: string) {
   if (checkIfValidParkingLot(parkingLot)) return
   const parkCarStatus = parkingLot.parkCar(input)
   if (parkCarStatus.status === "failure") {
+    console.log("failure in parking")
+
     if (parkCarStatus.message === "InvalidInput") {
       console.log("Please Enter a valid car number and car Color")
     }
@@ -98,7 +101,7 @@ export function getAllCarNumbersByColor(color: string, parkingLot: ParkingLot) {
 }
 
 function checkIfValidParkingLot(parkingLot: ParkingLot) {
-  if (parkingLot.parkingLotSize === 0) {
+  if (parkingLot.parkingSlots.length === 0) {
     console.log("Please Enter a valid Parking Lot")
     return true
   } else {
