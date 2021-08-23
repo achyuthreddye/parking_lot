@@ -62,7 +62,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         this.parkingSlots[i].slotId === slotNo &&
-        !this.parkingSlots[i].isEmpty
+        !this.parkingSlots[i].isEmpty()
       ) {
         this.parkingSlots[i].car = new Car()
         return { status: "success", message: this.parkingSlots[i].slotId }

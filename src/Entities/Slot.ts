@@ -3,7 +3,6 @@ import { Car } from "./Car"
 export class Slot {
   constructor(slotId: number) {
     this.slotId = slotId
-    this.car = new Car()
   }
 
   car: Car
@@ -16,6 +15,10 @@ export class Slot {
     this.car = new Car()
   }
   isEmpty() {
-    return this.car.carColor === undefined && this.car.carNumber === undefined
+    return (
+      !this.car ||
+      this.car.carColor === undefined ||
+      this.car.carNumber === undefined
+    )
   }
 }
