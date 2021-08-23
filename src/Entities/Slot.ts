@@ -12,7 +12,8 @@ export class Slot {
     this.car = carTobeParked
   }
   unPark() {
-    this.car = new Car()
+    this.car.carColor = undefined
+    this.car.carNumber = undefined
   }
   isEmpty() {
     return (

@@ -1,31 +1,15 @@
 import { Car } from "./Car"
 import { Slot } from "./Slot"
 export class ParkingLot {
-  constructor() {
+  constructor(parkLotSize: number) {
     this.parkingSlots = new Array()
+    for (let i = 0; i < parkLotSize; i++) {
+      this.parkingSlots.push(new Slot(i + 1))
+    }
   }
 
   parkingSlots: Slot[]
 
-  createParkingLot(input: number): {
-    status: string
-    message: string | number
-  } {
-    if (!input || input <= 0) {
-      return {
-        status: "failure",
-        message: "Invalid Input",
-      }
-    }
-
-    for (let i = 0; i < input; i++) {
-      this.parkingSlots.push(new Slot(i + 1))
-    }
-    return {
-      status: "success",
-      message: this.parkingSlots.length,
-    }
-  }
   getNextNearestSlot(currentParkingArray: Slot[]): {
     status: boolean
     value: string | number
@@ -118,10 +102,10 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.carColor.toLowerCase() ===
+        this.parkingSlots[i].car.carColor!.toLowerCase() ===
           carColor.toLowerCase()
       ) {
-        carList.push(this.parkingSlots[i].car.carNumber)
+        carList.push(this.parkingSlots[i].car.carNumber!)
       }
     }
     return carList.length > 1
@@ -137,7 +121,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.carColor.toLowerCase() ===
+        this.parkingSlots[i].car.carColor!.toLowerCase() ===
           carColor.toLowerCase()
       ) {
         slotList.push(this.parkingSlots[i].slotId)

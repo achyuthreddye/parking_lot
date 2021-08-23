@@ -1,28 +1,25 @@
 import { Car } from "./Entities/Car"
 import { ParkingLot } from "./Entities/ParkingLot"
+let parkingLot: ParkingLot
 
-export function createParkingLot(parkingLot: ParkingLot, lotSize: number) {
-  const createParkLotStatus = parkingLot.createParkingLot(lotSize)
-
-  if (createParkLotStatus.status === "success") {
-    console.log(
-      "Created a parking lot with ",
-      createParkLotStatus.message,
-      " slots"
-    )
-  } else {
-    console.log(
-      "please enter the valid number to allot the maximum no of parking slots"
-    )
+export function createParkingLot(lotSize: number) {
+  if (!lotSize || lotSize <= 0) {
+    console.log("Please enter a valid lotsize to create the parking lot")
+    return
   }
+
+  parkingLot = new ParkingLot(lotSize)
+  console.log(parkingLot.parkingSlots.length)
 }
 
-export function parkCar(parkingLot: ParkingLot, input: string) {
+export function parkCar(input: string) {
   if (checkIfValidParkingLot(parkingLot)) return
   const carNumber: string = input.split(" ")[1]
   const carColor: string = input.split(" ")[2]
-  if (!carNumber || !carColor)
+  if (!carNumber || !carColor) {
     console.log("Please enter a valid car Number and car Color")
+    return
+  }
   const carObj = new Car()
   carObj.create(carNumber, carColor)
 
@@ -38,10 +35,7 @@ export function parkCar(parkingLot: ParkingLot, input: string) {
   }
 }
 
-export function unParkCarBySlotNumber(
-  parkingLot: ParkingLot,
-  slotNumber: number
-) {
+export function unParkCarBySlotNumber(slotNumber: number) {
   if (checkIfValidParkingLot(parkingLot)) return
   const unparkStatus = parkingLot.unParkCarBySlotNumber(slotNumber)
   if (
@@ -54,7 +48,7 @@ export function unParkCarBySlotNumber(
   }
 }
 
-export function getAllParkingStatus(parkingLot: ParkingLot) {
+export function getAllParkingStatus() {
   if (checkIfValidParkingLot(parkingLot)) return
   const parkedCarsArray: any[] = parkingLot.getAllParkingStatus()
   if (parkedCarsArray.length === 0) {
@@ -65,7 +59,7 @@ export function getAllParkingStatus(parkingLot: ParkingLot) {
   }
 }
 
-export function getSlotByCarNo(inputString: string, parkingLot: ParkingLot) {
+export function getSlotByCarNo(inputString: string) {
   if (checkIfValidParkingLot(parkingLot)) return
   const getSlotByCarNoStatus = parkingLot.getSlotByCarNo(inputString)
   if (
@@ -77,7 +71,7 @@ export function getSlotByCarNo(inputString: string, parkingLot: ParkingLot) {
     console.log("Car is parked in :", getSlotByCarNoStatus.message)
   }
 }
-export function getAllSlotsByCarColor(color: string, parkingLot: ParkingLot) {
+export function getAllSlotsByCarColor(color: string) {
   if (checkIfValidParkingLot(parkingLot)) return
   const getAllSlotsByCarColorStatus = parkingLot.getAllSlotsByCarColor(color)
   if (
@@ -86,11 +80,11 @@ export function getAllSlotsByCarColor(color: string, parkingLot: ParkingLot) {
   ) {
     console.log("No Car with the given color exist in the parking lot")
   } else {
-    console.log(getAllSlotsByCarColorStatus.payload.join("\n"))
+    console.log(getAllSlotsByCarColorStatus.payload.join("\t"))
   }
 }
 
-export function getAllCarNumbersByColor(color: string, parkingLot: ParkingLot) {
+export function getAllCarNumbersByColor(color: string) {
   if (checkIfValidParkingLot(parkingLot)) return
   const getAllCarNumbersByColorStatus =
     parkingLot.getAllCarNumbersByColor(color)

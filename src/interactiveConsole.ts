@@ -1,11 +1,7 @@
 import * as readLine from "readline"
-import { ParkingLot } from "./Entities/ParkingLot"
 import { processUsercommands } from "./processUserCommands"
 
-export function interactiveConsole(
-  interactiveMode: boolean,
-  parkingLot: ParkingLot
-) {
+export function interactiveConsole(interactiveMode: boolean) {
   var prompts = readLine.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -13,8 +9,8 @@ export function interactiveConsole(
   })
   if (interactiveMode) {
     prompts.question("Input: ", function (data: string) {
-      processUsercommands(data, parkingLot)
-      interactiveConsole(interactiveMode, parkingLot)
+      processUsercommands(data)
+      interactiveConsole(interactiveMode)
     })
   }
 }

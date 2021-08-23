@@ -1,11 +1,7 @@
-import { ParkingLot } from "./Entities/ParkingLot"
 import { processUsercommands } from "./processUserCommands"
 import * as fs from "fs"
 
-export function fileConsole(
-  parkingLot: ParkingLot,
-  commandLineInputs: string[]
-) {
+export function fileConsole(commandLineInputs: string[]) {
   if (!fs.existsSync(commandLineInputs[2])) {
     console.log(
       "file doesn't exists Please enter the valid filename. sing ./fileInputs.txt is encouraged"
@@ -16,7 +12,7 @@ export function fileConsole(
     if (err) console.log("error in reading file")
     const inputArray = data.split("\n")
     inputArray.forEach((item) => {
-      processUsercommands(item, parkingLot)
+      processUsercommands(item)
     })
     process.exit(0)
   })

@@ -1,4 +1,3 @@
-import { ParkingLot } from "./Entities/ParkingLot"
 import {
   createParkingLot,
   getAllCarNumbersByColor,
@@ -9,32 +8,32 @@ import {
   unParkCarBySlotNumber,
 } from "./wrapper"
 
-export function processUsercommands(input: string, parkingLot: ParkingLot) {
+export function processUsercommands(input: string) {
   const userCommand: string = input.split(" ")[0]
 
   switch (userCommand) {
     case "create_parking_lot":
-      createParkingLot(parkingLot, Number(input.split(" ")[1]))
+      createParkingLot(Number(input.split(" ")[1]))
 
       break
     case "park":
-      parkCar(parkingLot, input)
+      parkCar(input)
       break
     case "leave":
-      unParkCarBySlotNumber(parkingLot, Number(input.split(" ")[1]))
+      unParkCarBySlotNumber(Number(input.split(" ")[1]))
       break
     case "status":
-      getAllParkingStatus(parkingLot)
+      getAllParkingStatus()
       break
     case "registration_numbers_for_cars_with_colour":
-      getAllCarNumbersByColor(input.split(" ")[1], parkingLot)
+      getAllCarNumbersByColor(input.split(" ")[1])
       break
     case "slot_numbers_for_cars_with_colour":
-      getAllSlotsByCarColor(input.split(" ")[1], parkingLot)
+      getAllSlotsByCarColor(input.split(" ")[1])
 
       break
     case "slot_number_for_registration_number":
-      getSlotByCarNo(input.split(" ")[1], parkingLot)
+      getSlotByCarNo(input.split(" ")[1])
       break
     case "quit":
       process.exit(0)
