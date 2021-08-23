@@ -39,12 +39,6 @@ export class ParkingLot {
     const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
 
     if (nextNearestStatusObj.status === true) {
-      // const carNumber: string = carInputString.split(" ")[1]
-      // const carColor: string = carInputString.split(" ")[2]
-      // const carObj = new Car()
-      // carObj.create(carNumber, carColor)
-      // if (!carNumber || !carColor)
-      //   return { status: "failure", message: "InvalidInput" }
       this.parkingSlots[Number(nextNearestStatusObj.value)].park(carObj)
     } else {
       return {

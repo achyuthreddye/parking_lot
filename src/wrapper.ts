@@ -21,17 +21,18 @@ export function parkCar(parkingLot: ParkingLot, input: string) {
   if (checkIfValidParkingLot(parkingLot)) return
   const carNumber: string = input.split(" ")[1]
   const carColor: string = input.split(" ")[2]
-  const carObj = new Car()
-  carObj.create(carNumber, carColor)
   if (!carNumber || !carColor)
     console.log("Please enter a valid car Number and car Color")
+  const carObj = new Car()
+  carObj.create(carNumber, carColor)
 
   const parkCarStatus = parkingLot.parkCar(carObj)
 
-  if (parkCarStatus.status === "failure") {
-    if (parkCarStatus.message === "ParkingLotFilled") {
-      console.log("Sorry, Parking Lot is filled")
-    }
+  if (
+    parkCarStatus.status === "failure" &&
+    parkCarStatus.message === "ParkingLotFilled"
+  ) {
+    console.log("Sorry, Parking Lot is filled")
   } else {
     console.log("Allocated slot number:", parkCarStatus.message)
   }
