@@ -111,7 +111,7 @@ describe("Checking for the next nearest spot in the parking lot", () => {
       message: 2,
     })
   })
-  test("should return parkinglot filles status", () => {
+  test("should return parkinglot filled status", () => {
     const nextParkingLotObj = newParkingLot.getNextNearestSlot()
     expect(nextParkingLotObj).toStrictEqual({
       status: "failure",

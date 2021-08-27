@@ -13,7 +13,7 @@ export function createParkingLot(lotSize: number) {
 }
 
 export function parkCar(input: string) {
-  if (checkIfValidParkingLot(parkingLot)) return
+  if (checkIfValidParkingLot()) return
   const carNumber: string = input.split(" ")[1]
   const carColor: string = input.split(" ")[2]
   if (!carNumber || !carColor) {
@@ -36,7 +36,7 @@ export function parkCar(input: string) {
 }
 
 export function unParkCarBySlotNumber(slotNumber: number) {
-  if (checkIfValidParkingLot(parkingLot)) return
+  if (checkIfValidParkingLot()) return
   const unparkStatus = parkingLot.unParkCarBySlotNumber(slotNumber)
   if (
     unparkStatus.status === "failure" &&
@@ -49,7 +49,7 @@ export function unParkCarBySlotNumber(slotNumber: number) {
 }
 
 export function getAllParkingStatus() {
-  if (checkIfValidParkingLot(parkingLot)) return
+  if (checkIfValidParkingLot()) return
   const parkedCarsArray: any[] = parkingLot.getAllParkingStatus()
   if (parkedCarsArray.length === 0) {
     console.log("sorry the parking lot is empty")
@@ -60,7 +60,7 @@ export function getAllParkingStatus() {
 }
 
 export function getSlotByCarNo(inputString: string) {
-  if (checkIfValidParkingLot(parkingLot)) return
+  if (checkIfValidParkingLot()) return
   const getSlotByCarNoStatus = parkingLot.getSlotByCarNo(inputString)
   if (
     getSlotByCarNoStatus.status === "failure" &&
@@ -72,7 +72,7 @@ export function getSlotByCarNo(inputString: string) {
   }
 }
 export function getAllSlotsByCarColor(color: string) {
-  if (checkIfValidParkingLot(parkingLot)) return
+  if (checkIfValidParkingLot()) return
   const getAllSlotsByCarColorStatus = parkingLot.getAllSlotsByCarColor(color)
   if (
     getAllSlotsByCarColorStatus.status === "failure" &&
@@ -85,7 +85,7 @@ export function getAllSlotsByCarColor(color: string) {
 }
 
 export function getAllCarNumbersByColor(color: string) {
-  if (checkIfValidParkingLot(parkingLot)) return
+  if (checkIfValidParkingLot()) return
   const getAllCarNumbersByColorStatus =
     parkingLot.getAllCarNumbersByColor(color)
 
@@ -99,9 +99,13 @@ export function getAllCarNumbersByColor(color: string) {
   }
 }
 
-function checkIfValidParkingLot(parkingLot: ParkingLot) {
-  if (parkingLot.parkingSlots.length === 0) {
-    console.log("Please Enter a valid Parking Lot")
+function checkIfValidParkingLot() {
+  if (
+    !parkingLot ||
+    !parkingLot.parkingSlots ||
+    parkingLot.parkingSlots.length === 0
+  ) {
+    console.log("Please create a parking Lot first")
     return true
   } else {
     return false

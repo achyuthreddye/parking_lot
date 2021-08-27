@@ -14,7 +14,6 @@ export function processUsercommands(input: string) {
   switch (userCommand) {
     case "create_parking_lot":
       createParkingLot(Number(input.split(" ")[1]))
-
       break
     case "park":
       parkCar(input)
