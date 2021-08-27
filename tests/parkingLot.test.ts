@@ -98,7 +98,7 @@ describe("Checking for the next nearest spot in the parking lot", () => {
   test("should return valid empty slot in the parking lot containing empty slots", () => {
     const nextParkingLotObj = newParkingLot.getNextNearestSlot()
     expect(nextParkingLotObj).toStrictEqual({
-      status: true,
+      status: "success",
       value: 1,
     })
   })
@@ -114,7 +114,7 @@ describe("Checking for the next nearest spot in the parking lot", () => {
   test("should return parkinglot filles status", () => {
     const nextParkingLotObj = newParkingLot.getNextNearestSlot()
     expect(nextParkingLotObj).toStrictEqual({
-      status: false,
+      status: "failure",
       value: "ParkingLotFilled",
     })
   })

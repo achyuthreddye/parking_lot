@@ -12,14 +12,14 @@ export class ParkingLot {
 
   getNextNearestSlot() {
     for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (this.parkingSlots[i].isEmpty()) return { status: true, value: i }
+      if (this.parkingSlots[i].isEmpty()) return { status: "success", value: i }
     }
-    return { status: false, value: "ParkingLotFilled" }
+    return { status: "failure", value: "ParkingLotFilled" }
   }
   parkCar(carObj: Car): { status: string; message: string | number } {
     const nextNearestStatusObj = this.getNextNearestSlot()
 
-    if (nextNearestStatusObj.status) {
+    if (nextNearestStatusObj.status === "success") {
       this.parkingSlots[Number(nextNearestStatusObj.value)].park(carObj)
       return {
         status: "success",
