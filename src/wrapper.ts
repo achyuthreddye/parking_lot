@@ -4,12 +4,11 @@ let parkingLot: ParkingLot
 
 export function createParkingLot(lotSize: number) {
   if (!lotSize || lotSize <= 0) {
-    console.log("Please enter a valid lotsize to create the parking lot")
-    return
+    return "Please enter a valid lotsize to create the parking lot"
   }
 
   parkingLot = new ParkingLot(lotSize)
-  console.log(parkingLot.parkingSlots.length)
+  return parkingLot.parkingSlots.length
 }
 
 export function parkCar(input: string) {
@@ -17,8 +16,7 @@ export function parkCar(input: string) {
   const carNumber: string = input.split(" ")[1]
   const carColor: string = input.split(" ")[2]
   if (!carNumber || !carColor) {
-    console.log("Please enter a valid car Number and car Color")
-    return
+    return "Please enter a valid car Number and car Color"
   }
   const carObj = new Car()
   carObj.create(carNumber, carColor)
@@ -29,9 +27,9 @@ export function parkCar(input: string) {
     parkCarStatus.status === "failure" &&
     parkCarStatus.message === "ParkingLotFilled"
   ) {
-    console.log("Sorry, Parking Lot is filled")
+    return "Sorry, Parking Lot is filled"
   } else {
-    console.log("Allocated slot number:", parkCarStatus.message)
+    return `Allocated slot number: ${parkCarStatus.message}`
   }
 }
 
@@ -42,9 +40,9 @@ export function unParkCarBySlotNumber(slotNumber: number) {
     unparkStatus.status === "failure" &&
     unparkStatus.message === "CarNotParked"
   ) {
-    console.log("No car is parked in the given slot")
+    return "No car is parked in the given slot"
   } else {
-    console.log("Slot number ", slotNumber, "is free")
+    return `Slot number ${slotNumber} is free`
   }
 }
 
@@ -52,10 +50,11 @@ export function getAllParkingStatus() {
   if (checkIfValidParkingLot()) return
   const parkedCarsArray: any[] = parkingLot.getAllParkingStatus()
   if (parkedCarsArray.length === 0) {
-    console.log("sorry the parking lot is empty")
+    return "sorry the parking lot is empty"
   } else {
-    console.log("Slot No   Registration Number   Colorcle")
-    console.log(parkedCarsArray.join("\n"))
+    return ["Slot No   Registration Number   Color", ...parkedCarsArray].join(
+      "\n"
+    )
   }
 }
 
@@ -66,9 +65,9 @@ export function getSlotByCarNo(inputString: string) {
     getSlotByCarNoStatus.status === "failure" &&
     getSlotByCarNoStatus.message === "carNotParked"
   ) {
-    console.log("Car is not parked in the parking lot")
+    return "Car is not parked in the parking lot"
   } else {
-    console.log("Car is parked in :", getSlotByCarNoStatus.message)
+    return `Car is parked in : ${getSlotByCarNoStatus.message}`
   }
 }
 export function getAllSlotsByCarColor(color: string) {
@@ -78,9 +77,9 @@ export function getAllSlotsByCarColor(color: string) {
     getAllSlotsByCarColorStatus.status === "failure" &&
     getAllSlotsByCarColorStatus.message === "NoCar"
   ) {
-    console.log("No Car with the given color exist in the parking lot")
+    return "No Car with the given color exist in the parking lot"
   } else {
-    console.log(getAllSlotsByCarColorStatus.payload.join("\t"))
+    return getAllSlotsByCarColorStatus.payload.join(" ")
   }
 }
 
@@ -93,9 +92,9 @@ export function getAllCarNumbersByColor(color: string) {
     getAllCarNumbersByColorStatus.status === "failure" &&
     getAllCarNumbersByColorStatus.message === "NoCar"
   ) {
-    console.log("No Car with the given color exist in the parking lot")
+    return "No Car with the given color exist in the parking lot"
   } else {
-    console.log(getAllCarNumbersByColorStatus.payload.join("\n"))
+    return getAllCarNumbersByColorStatus.payload.join("\n")
   }
 }
 
