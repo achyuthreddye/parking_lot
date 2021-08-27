@@ -29,7 +29,7 @@ export class ParkingLot {
   parkCar(carObj: Car): { status: string; message: string | number } {
     const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
 
-    if (nextNearestStatusObj.status === true) {
+    if (nextNearestStatusObj.status) {
       this.parkingSlots[Number(nextNearestStatusObj.value)].park(carObj)
       return {
         status: "success",
@@ -49,7 +49,7 @@ export class ParkingLot {
   } {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
-        this.parkingSlots[i].slotId === slotNo &&
+        this.parkingSlots[i].isSlotSame(slotNo) &&
         !this.parkingSlots[i].isEmpty()
       ) {
         this.parkingSlots[i].unpark()

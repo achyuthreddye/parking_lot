@@ -14,6 +14,9 @@ export class Slot {
   unpark() {
     this.car = new Car()
   }
+  isSlotSame(slotNo: number) {
+    return this.slotId === slotNo
+  }
 
   isEmpty() {
     return (

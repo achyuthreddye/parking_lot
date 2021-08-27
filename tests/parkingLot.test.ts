@@ -106,7 +106,7 @@ describe("Checking for the next nearest spot in the parking lot", () => {
   })
   test("should park a car ", () => {
     const carObj = new Car()
-    carObj.create("MH01hfjd", "purple")
+    carObj.create("MH01M6787", "purple")
     const parkCarStatus = newParkingLot.parkCar(carObj)
     expect(parkCarStatus).toStrictEqual({
       status: "success",
@@ -169,5 +169,17 @@ describe("Checking for the slot numbers based on the car color", () => {
       message: "NoCar",
       payload: [],
     })
+  })
+})
+describe("checking for the complete parking Slot status", () => {
+  test("should return all the alloted parking slots", () => {
+    expect(newParkingLot.getAllParkingStatus()).toStrictEqual([
+      "1,KA40M8500,white",
+      "2,MH01M6787,purple",
+      "3,KA40M8502,white",
+      "4,KA40M8503,green",
+      "5,KA40M8504,white",
+      "6,KA40M8505,blue",
+    ])
   })
 })
