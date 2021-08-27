@@ -10,24 +10,14 @@ export class ParkingLot {
 
   parkingSlots: Slot[]
 
-  getNextNearestSlot(currentParkingArray: Slot[]): {
-    status: boolean
-    value: string | number
-  } {
-    if (!currentParkingArray || currentParkingArray.length === 0)
-      return {
-        status: false,
-        value: "Please enter the valid current parking array",
-      }
-
-    for (let i = 0; i < currentParkingArray.length; i++) {
-      if (currentParkingArray[i].isEmpty()) return { status: true, value: i }
+  getNextNearestSlot() {
+    for (let i = 0; i < this.parkingSlots.length; i++) {
+      if (this.parkingSlots[i].isEmpty()) return { status: true, value: i }
     }
-    return { status: false, value: "Parking lot is completely filled" }
+    return { status: false, value: "ParkingLotFilled" }
   }
-
   parkCar(carObj: Car): { status: string; message: string | number } {
-    const nextNearestStatusObj = this.getNextNearestSlot(this.parkingSlots)
+    const nextNearestStatusObj = this.getNextNearestSlot()
 
     if (nextNearestStatusObj.status) {
       this.parkingSlots[Number(nextNearestStatusObj.value)].park(carObj)

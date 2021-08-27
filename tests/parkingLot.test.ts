@@ -96,9 +96,7 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
 })
 describe("Checking for the next nearest spot in the parking lot", () => {
   test("should return valid empty slot in the parking lot containing empty slots", () => {
-    const nextParkingLotObj = newParkingLot.getNextNearestSlot(
-      newParkingLot.parkingSlots
-    )
+    const nextParkingLotObj = newParkingLot.getNextNearestSlot()
     expect(nextParkingLotObj).toStrictEqual({
       status: true,
       value: 1,
@@ -114,12 +112,10 @@ describe("Checking for the next nearest spot in the parking lot", () => {
     })
   })
   test("should return parkinglot filles status", () => {
-    const nextParkingLotObj = newParkingLot.getNextNearestSlot(
-      newParkingLot.parkingSlots
-    )
+    const nextParkingLotObj = newParkingLot.getNextNearestSlot()
     expect(nextParkingLotObj).toStrictEqual({
       status: false,
-      value: "Parking lot is completely filled",
+      value: "ParkingLotFilled",
     })
   })
 })
