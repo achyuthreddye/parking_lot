@@ -16,6 +16,7 @@ export class ParkingLot {
     }
     return { status: "failure", value: "ParkingLotFilled" }
   }
+
   parkCar(carObj: Car): { status: string; message: string | number } {
     const nextNearestStatusObj = this.getNextNearestSlot()
 

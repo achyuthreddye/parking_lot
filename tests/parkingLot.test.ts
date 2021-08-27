@@ -134,7 +134,7 @@ describe("checking for the slot number based on the car registration number", ()
   })
 })
 
-describe("checking for the car numbers based on the car registration numbers", () => {
+describe("checking for the car numbers based on the car colors", () => {
   test("should return all the cars with the given color", () => {
     expect(newParkingLot.getAllCarNumbersByColor("white")).toStrictEqual({
       status: "success",
