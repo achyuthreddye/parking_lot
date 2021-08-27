@@ -102,8 +102,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.carColor!.toLowerCase() ===
-          carColor.toLowerCase()
+        this.parkingSlots[i].car.isCarSameByCarColor(carColor)
       ) {
         carList.push(this.parkingSlots[i].car.carNumber!)
       }

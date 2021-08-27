@@ -137,3 +137,18 @@ describe("checking for the slot number based on the car registration number", ()
     })
   })
 })
+
+describe("checking for the car numbers based on the car registration numbers", () => {
+  test("should return all the cars with the given color", () => {
+    expect(newParkingLot.getAllCarNumbersByColor("white")).toStrictEqual({
+      status: "success",
+      message: "",
+      payload: ["KA40M8500", "KA40M8502", "KA40M8504"],
+    })
+  })
+  test("should return an empty array of cars with invalid car color given", () => {
+    expect(
+      newParkingLot.getAllCarNumbersByColor("invalidColor|colorNotInParkingLot")
+    ).toStrictEqual({ status: "failure", message: "NoCar", payload: [] })
+  })
+})
