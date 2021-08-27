@@ -83,6 +83,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
+        // isCarSame(this.parkingSlots[i])
         this.parkingSlots[i].car.carNumber === carNumber
       ) {
         return { status: "success", message: this.parkingSlots[i].slotId }
@@ -136,3 +137,17 @@ export class ParkingLot {
         }
   }
 }
+
+// const validNewCar = new Car()
+// validNewCar.create("MH01k6565", "purple")
+// newParkingLot.parkCar(validNewCar)
+
+// test("should return invalid empty slot in the completely filled parking lot", () => {
+//   const nextParkingLotObj = newParkingLot.getNextNearestSlot(
+//     newParkingLot.parkingSlots
+//   )
+//   expect(nextParkingLotObj).toStrictEqual({
+//     status: false,
+//     value: "Parking lot is completely filled",
+//   })
+// })
