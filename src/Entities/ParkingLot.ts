@@ -120,16 +120,15 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.carColor.toLowerCase() ===
-          carColor.toLowerCase()
+        this.parkingSlots[i].car.isCarSameByCarColor(carColor)
       ) {
         slotList.push(this.parkingSlots[i].slotId)
       }
     }
     return slotList.length > 1
-      ? { status: "failure", payload: slotList, message: "" }
+      ? { status: "success", payload: slotList, message: "" }
       : {
-          status: "success",
+          status: "failure",
           message: "NoCar",
           payload: slotList,
         }

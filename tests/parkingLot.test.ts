@@ -152,3 +152,22 @@ describe("checking for the car numbers based on the car registration numbers", (
     ).toStrictEqual({ status: "failure", message: "NoCar", payload: [] })
   })
 })
+
+describe("Checking for the slot numbers based on the car color", () => {
+  test("Should return all the slots with the given color", () => {
+    expect(newParkingLot.getAllSlotsByCarColor("white")).toStrictEqual({
+      status: "success",
+      message: "",
+      payload: [1, 3, 5],
+    })
+  })
+  test("should return an empty array and failure mesage for the invalid color", () => {
+    expect(
+      newParkingLot.getAllSlotsByCarColor("InvalidCarColor")
+    ).toStrictEqual({
+      status: "failure",
+      message: "NoCar",
+      payload: [],
+    })
+  })
+})
