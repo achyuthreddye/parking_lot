@@ -7,12 +7,12 @@ const commandLineInputs = process.argv
 let interactiveMode: boolean = false
 
 if (commandLineInputs[commandLineInputs.length - 1].endsWith(".txt")) {
-  fileConsole(commandLineInputs)
+  const filereadStatus = fileConsole(commandLineInputs)
+  if (filereadStatus === "Invalid file")
+    console.log(
+      "file doesn't exists Please enter the valid filename. sing ./fileInputs.txt is encouraged"
+    )
 } else {
   interactiveMode = true
   interactiveConsole(interactiveMode)
 }
-// TODO: Update the  DONE
-// TODO: create encapsulation where ever needed or accessing the stuff
-// TODO: testcases for wrapper
-// TODO: look at the car object after unparking
