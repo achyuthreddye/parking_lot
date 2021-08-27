@@ -79,7 +79,7 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
       message: "ParkingLotFilled",
     })
   })
-  test("unpark the car", () => {
+  test("unpark the car that would return the slot id which freed", () => {
     const unparkStatus = newParkingLot.unParkCarBySlotNumber(2)
     expect(unparkStatus).toStrictEqual({
       status: "success",
@@ -120,6 +120,20 @@ describe("Checking for the next nearest spot in the parking lot", () => {
     expect(nextParkingLotObj).toStrictEqual({
       status: false,
       value: "Parking lot is completely filled",
+    })
+  })
+})
+describe("checking for the slot number based on the car registration number", () => {
+  test("should return the car number", () => {
+    expect(newParkingLot.getSlotByCarNo("KA40M8505")).toStrictEqual({
+      status: "success",
+      message: 6,
+    })
+  })
+  test("should return the car not parkied status", () => {
+    expect(newParkingLot.getSlotByCarNo("KA40M8599")).toStrictEqual({
+      status: "failure",
+      message: "carNotParked",
     })
   })
 })

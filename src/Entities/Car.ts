@@ -14,7 +14,7 @@ export class Car {
   //   return this._carColor
   // }
 
-  static isCarSame(carA: Car, carB: Car) {
-    return carA.carNumber.toLowerCase() === carB.carNumber.toLowerCase()
+  isCarSame(carNumberTobeChecked: string) {
+    return this.carNumber.toLowerCase() === carNumberTobeChecked.toLowerCase()
   }
 }

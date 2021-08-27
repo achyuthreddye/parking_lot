@@ -11,10 +11,10 @@ export class Slot {
   park(carTobeParked: Car) {
     this.car = carTobeParked
   }
-  // unPark() {
-  //   this.car.carColor("")
-  //   this.car.carNumber("")
-  // }
+  unpark() {
+    this.car = new Car()
+  }
+
   isEmpty() {
     return (
       !this.car ||
