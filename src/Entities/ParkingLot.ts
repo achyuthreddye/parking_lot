@@ -83,7 +83,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.isCarSame(carNumber)
+        this.parkingSlots[i].car.isCarSameByCarNumber(carNumber)
       ) {
         return { status: "success", message: this.parkingSlots[i].slotId }
       }
@@ -121,7 +121,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.carColor!.toLowerCase() ===
+        this.parkingSlots[i].car.carColor.toLowerCase() ===
           carColor.toLowerCase()
       ) {
         slotList.push(this.parkingSlots[i].slotId)

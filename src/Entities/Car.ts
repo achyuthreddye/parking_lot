@@ -7,14 +7,8 @@ export class Car {
     this.carColor = carColor
     return this
   }
-  // public get carNumber() {
-  //   return this._carNumber
-  // }
-  // public get carColor() {
-  //   return this._carColor
-  // }
 
-  isCarSame(carNumberTobeChecked: string) {
+  isCarSameByCarNumber(carNumberTobeChecked: string) {
     return this.carNumber.toLowerCase() === carNumberTobeChecked.toLowerCase()
   }
 }
