@@ -5,14 +5,14 @@ export class Slot {
     this.slotId = slotId
   }
 
-  car: Car
+  car: Car | null
   slotId: number
 
   park(carTobeParked: Car) {
     this.car = carTobeParked
   }
   unpark() {
-    this.car = new Car()
+    this.car = null
   }
   isSlotSame(slotNo: number) {
     return this.slotId === slotNo

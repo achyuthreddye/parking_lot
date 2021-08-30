@@ -58,8 +58,8 @@ export class ParkingLot {
         arr.push(
           [
             this.parkingSlots[i].slotId,
-            this.parkingSlots[i].car.carNumber,
-            this.parkingSlots[i].car.carColor,
+            this.parkingSlots[i].car!.carNumber,
+            this.parkingSlots[i].car!.carColor,
           ].toString()
         )
       }
@@ -74,7 +74,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.isCarSameByCarNumber(carNumber)
+        this.parkingSlots[i].car!.isCarSameByCarNumber(carNumber)
       ) {
         return { status: "success", message: this.parkingSlots[i].slotId }
       }
@@ -93,9 +93,9 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.isCarSameByCarColor(carColor)
+        this.parkingSlots[i].car!.isCarSameByCarColor(carColor)
       ) {
-        carList.push(this.parkingSlots[i].car.carNumber!)
+        carList.push(this.parkingSlots[i].car!.carNumber!)
       }
     }
     return carList.length > 1
@@ -111,7 +111,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car.isCarSameByCarColor(carColor)
+        this.parkingSlots[i].car!.isCarSameByCarColor(carColor)
       ) {
         slotList.push(this.parkingSlots[i].slotId)
       }

@@ -16,3 +16,4 @@ if (commandLineInputs[commandLineInputs.length - 1].endsWith(".txt")) {
   interactiveMode = true
   interactiveConsole(interactiveMode)
 }
+// TODO: Should the parking lot class be a singleton
