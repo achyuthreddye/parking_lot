@@ -18,8 +18,7 @@ export function parkCar(input: string) {
   if (!carNumber || !carColor) {
     return "Please enter a valid car Number and car Color"
   }
-  const carObj = new Car()
-  carObj.create(carNumber, carColor)
+  const carObj = new Car(carNumber, carColor)
 
   const parkCarStatus = parkingLot.parkCar(carObj)
 

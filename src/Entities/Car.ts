@@ -1,12 +1,16 @@
 export class Car {
+  constructor(carNumber: string, carColor: string) {
+    this.carNumber = carNumber
+    this.carColor = carColor
+  }
   carNumber: string
   carColor: string
 
-  create(carNumber: string, carColor: string) {
-    this.carNumber = carNumber
-    this.carColor = carColor
-    return this
-  }
+  // create(carNumber: string, carColor: string) {
+  //   this.carNumber = carNumber
+  //   this.carColor = carColor
+  //   return this
+  // }
 
   isCarSameByCarNumber(carNumberTobeChecked: string) {
     return this.carNumber.toLowerCase() === carNumberTobeChecked.toLowerCase()

@@ -17,8 +17,8 @@ describe("creating the Parking lot", () => {
 const newParkingLot = new ParkingLot(6)
 describe("Creating a new Parking lot and parking the cars in the parking slots", () => {
   test("park the car 1 , should be parked", () => {
-    const validCar = new Car()
-    validCar.create("KA40M8500", "white")
+    const validCar = new Car("KA40M8500", "white")
+
     const parkedSlot = newParkingLot.parkCar(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "success",
@@ -26,8 +26,8 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     })
   })
   test("park the car 2 , should be parked", () => {
-    const validCar = new Car()
-    validCar.create("KA40M8501", "red")
+    const validCar = new Car("KA40M8501", "red")
+
     const parkedSlot = newParkingLot.parkCar(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "success",
@@ -35,8 +35,8 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     })
   })
   test("park the car 3 , should be parked", () => {
-    const validCar = new Car()
-    validCar.create("KA40M8502", "white")
+    const validCar = new Car("KA40M8502", "white")
+
     const parkedSlot = newParkingLot.parkCar(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "success",
@@ -44,8 +44,8 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     })
   })
   test("park the car 4 , should be parked", () => {
-    const validCar = new Car()
-    validCar.create("KA40M8503", "green")
+    const validCar = new Car("KA40M8503", "green")
+
     const parkedSlot = newParkingLot.parkCar(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "success",
@@ -53,8 +53,8 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     })
   })
   test("park the car 5 , should be parked", () => {
-    const validCar = new Car()
-    validCar.create("KA40M8504", "white")
+    const validCar = new Car("KA40M8504", "white")
+
     const parkedSlot = newParkingLot.parkCar(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "success",
@@ -62,8 +62,8 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     })
   })
   test("park the car 6 , should be parked", () => {
-    const validCar = new Car()
-    validCar.create("KA40M8505", "blue")
+    const validCar = new Car("KA40M8505", "blue")
+
     const parkedSlot = newParkingLot.parkCar(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "success",
@@ -71,8 +71,8 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
     })
   })
   test("park the car 7, should not be parked", () => {
-    const validCar = new Car()
-    validCar.create("KA40M8506", "blue")
+    const validCar = new Car("KA40M8506", "blue")
+
     const parkedSlot = newParkingLot.parkCar(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "failure",
@@ -103,8 +103,8 @@ describe("Checking for the next nearest spot in the parking lot", () => {
     })
   })
   test("should park a car ", () => {
-    const carObj = new Car()
-    carObj.create("MH01M6787", "purple")
+    const carObj = new Car("MH01M6787", "purple")
+
     const parkCarStatus = newParkingLot.parkCar(carObj)
     expect(parkCarStatus).toStrictEqual({
       status: "success",
