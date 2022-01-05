@@ -2,10 +2,10 @@ import {
   createParkingLot,
   getAllCarNumbersByColor,
   getAllParkingStatus,
-  getAllSlotsByCarColor,
-  getSlotByCarNo,
-  parkCar,
-  unParkCarBySlotNumber,
+  getAllSlotsByColor,
+  getSlotByRegNo,
+  parkVehicle,
+  unParkVehicleBySlotNumber,
 } from "../src/wrapper"
 
 describe("Checking for creating Paking lot ", () => {
@@ -21,43 +21,47 @@ describe("Checking for creating Paking lot ", () => {
 
 describe("checking for parking car", () => {
   test("should return the slot id of parked car", () => {
-    expect(parkCar("park ka40m8500 white")).toBe("Allocated slot number: 1")
+    expect(parkVehicle("park ka40m8500 white")).toBe("Allocated slot number: 1")
   })
 
-  test("should return parkign lot filles status", () => {
-    parkCar("park ka40m8501 white")
-    parkCar("park ka40m8502 white")
-    expect(parkCar("park ka40m8503 red")).toBe("Sorry, Parking Lot is filled")
+  test("should return parking lot filled status", () => {
+    parkVehicle("park ka40m8501 white")
+    parkVehicle("park ka40m8502 white")
+    expect(parkVehicle("park ka40m8503 red")).toBe(
+      "Sorry, Parking Lot is filled"
+    )
   })
 })
 
-describe("Checking for unparking car", () => {
-  test("should return the slot id of the car which is freed from the parking lot", () => {
-    expect(unParkCarBySlotNumber(1)).toBe("Slot number 1 is free")
+describe("Checking for unparking vehicle", () => {
+  test("should return the slot id of the vehicle which is freed from the parking lot", () => {
+    expect(unParkVehicleBySlotNumber(1)).toBe("Slot number 1 is free")
   })
   test("should return the failure status for unparking the car which is not parked", () => {
-    expect(unParkCarBySlotNumber(1)).toBe("No car is parked in the given slot")
+    expect(unParkVehicleBySlotNumber(1)).toBe(
+      "No vehicle is parked in the given slot"
+    )
   })
 })
 
 describe("Checking for the slot number based on the car number", () => {
   test("Should return the slot id of the car where it is parked", () => {
-    expect(getSlotByCarNo("KA40m8501")).toBe("Car is parked in : 2")
+    expect(getSlotByRegNo("KA40m8501")).toBe("Vehicle is parked in : 2")
   })
   test("Should return the failure status when car is not parked", () => {
-    expect(getSlotByCarNo("KA40m8500")).toBe(
-      "Car is not parked in the parking lot"
+    expect(getSlotByRegNo("KA40m8500")).toBe(
+      "Vehicle is not parked in the parking lot"
     )
   })
 })
 
 describe("Checking for slot number array based on the car color", () => {
   test("should return the array where the given color cars are parked", () => {
-    expect(getAllSlotsByCarColor("white")).toStrictEqual("2 3")
+    expect(getAllSlotsByColor("white")).toStrictEqual("2 3")
   })
   test("should return the failure status for the invalid color", () => {
-    expect(getAllSlotsByCarColor("Invalidcolor")).toBe(
-      "No Car with the given color exist in the parking lot"
+    expect(getAllSlotsByColor("Invalidcolor")).toBe(
+      "No Vehicle with the given color exist in the parking lot"
     )
   })
 })

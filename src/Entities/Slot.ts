@@ -1,28 +1,29 @@
-import { Car } from "./Car"
+import { Vehicle } from "./Vehicle"
 
 export class Slot {
   constructor(slotId: number) {
     this.slotId = slotId
   }
 
-  car: Car | null
+  vehicle: Vehicle | null
   slotId: number
 
-  park(carTobeParked: Car) {
-    this.car = carTobeParked
+  allot(vehicleTobeParked: Vehicle) {
+    this.vehicle = vehicleTobeParked
   }
-  unpark() {
-    this.car = null
+  unallot() {
+    this.vehicle = null
   }
   isSlotSame(slotNo: number) {
     return this.slotId === slotNo
   }
 
   isEmpty() {
+    //FIXME: change this to getters
     return (
-      !this.car ||
-      this.car.carColor === undefined ||
-      this.car.carNumber === undefined
+      !this.vehicle ||
+      this.vehicle.vehicleColor === undefined ||
+      this.vehicle.vehicleNumber === undefined
     )
   }
 }

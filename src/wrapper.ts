@@ -1,4 +1,4 @@
-import { Car } from "./Entities/Car"
+import { Vehicle } from "./Entities/Vehicle"
 import { ParkingLot } from "./Entities/ParkingLot"
 let parkingLot: ParkingLot
 
@@ -11,35 +11,36 @@ export function createParkingLot(lotSize: number) {
   return parkingLot.parkingSlots.length
 }
 
-export function parkCar(input: string) {
+export function parkVehicle(input: string) {
   if (checkIfValidParkingLot()) return
-  const carNumber: string = input.split(" ")[1]
-  const carColor: string = input.split(" ")[2]
-  if (!carNumber || !carColor) {
-    return "Please enter a valid car Number and car Color"
+  const vehicleNumber: string = input.split(" ")[1]
+  const vehicleColor: string = input.split(" ")[2]
+  if (!vehicleNumber || !vehicleColor) {
+    return "Please enter a valid vehicle Number and vehicle Color"
   }
-  const carObj = new Car(carNumber, carColor)
+  //FIXME: update the vehicleTYPE
+  const vehicleObj = new Vehicle(vehicleNumber, vehicleColor, "car")
 
-  const parkCarStatus = parkingLot.parkCar(carObj)
+  const parkingStatus = parkingLot.parkVehicle(vehicleObj)
 
   if (
-    parkCarStatus.status === "failure" &&
-    parkCarStatus.message === "ParkingLotFilled"
+    parkingStatus.status === "failure" &&
+    parkingStatus.message === "ParkingLotFilled"
   ) {
     return "Sorry, Parking Lot is filled"
   } else {
-    return `Allocated slot number: ${parkCarStatus.message}`
+    return `Allocated slot number: ${parkingStatus.message}`
   }
 }
 
-export function unParkCarBySlotNumber(slotNumber: number) {
+export function unParkVehicleBySlotNumber(slotNumber: number) {
   if (checkIfValidParkingLot()) return
-  const unparkStatus = parkingLot.unParkCarBySlotNumber(slotNumber)
+  const unparkStatus = parkingLot.unParkVehicleBySlotNumber(slotNumber)
   if (
     unparkStatus.status === "failure" &&
-    unparkStatus.message === "CarNotParked"
+    unparkStatus.message === "vehicleNotParked"
   ) {
-    return "No car is parked in the given slot"
+    return "No vehicle is parked in the given slot"
   } else {
     return `Slot number ${slotNumber} is free`
   }
@@ -47,53 +48,55 @@ export function unParkCarBySlotNumber(slotNumber: number) {
 
 export function getAllParkingStatus() {
   if (checkIfValidParkingLot()) return
-  const parkedCarsArray: any[] = parkingLot.getAllParkingStatus()
-  if (parkedCarsArray.length === 0) {
+  const parkedVehiclesArray: any[] = parkingLot.getAllParkingStatus()
+  if (parkedVehiclesArray.length === 0) {
     return "sorry the parking lot is empty"
   } else {
-    return ["Slot No   Registration Number   Color", ...parkedCarsArray].join(
-      "\n"
-    )
+    return [
+      "Slot No   Registration Number   Color",
+      ...parkedVehiclesArray,
+    ].join("\n")
   }
 }
 
-export function getSlotByCarNo(inputString: string) {
+export function getSlotByRegNo(inputString: string) {
   if (checkIfValidParkingLot()) return
-  const getSlotByCarNoStatus = parkingLot.getSlotByCarNo(inputString)
+  const getSlotByVehicleNoStatus = parkingLot.getSlotByRegNo(inputString)
   if (
-    getSlotByCarNoStatus.status === "failure" &&
-    getSlotByCarNoStatus.message === "carNotParked"
+    getSlotByVehicleNoStatus.status === "failure" &&
+    getSlotByVehicleNoStatus.message === "vehicleNotParked"
   ) {
-    return "Car is not parked in the parking lot"
+    return "Vehicle is not parked in the parking lot"
   } else {
-    return `Car is parked in : ${getSlotByCarNoStatus.message}`
+    return `Vehicle is parked in : ${getSlotByVehicleNoStatus.message}`
   }
 }
-export function getAllSlotsByCarColor(color: string) {
+export function getAllSlotsByColor(color: string) {
   if (checkIfValidParkingLot()) return
-  const getAllSlotsByCarColorStatus = parkingLot.getAllSlotsByCarColor(color)
+  const getAllSlotsByVehicleColorStatus =
+    parkingLot.getAllSlotsByVehicleColor(color)
   if (
-    getAllSlotsByCarColorStatus.status === "failure" &&
-    getAllSlotsByCarColorStatus.message === "NoCar"
+    getAllSlotsByVehicleColorStatus.status === "failure" &&
+    getAllSlotsByVehicleColorStatus.message === "NoVehicle"
   ) {
-    return "No Car with the given color exist in the parking lot"
+    return "No Vehicle with the given color exist in the parking lot"
   } else {
-    return getAllSlotsByCarColorStatus.payload.join(" ")
+    return getAllSlotsByVehicleColorStatus.payload.join(" ")
   }
 }
 
 export function getAllCarNumbersByColor(color: string) {
   if (checkIfValidParkingLot()) return
-  const getAllCarNumbersByColorStatus =
-    parkingLot.getAllCarNumbersByColor(color)
+  const getAllVehicleNumbersByColorStatus =
+    parkingLot.getAllVehicleNumbersByColor(color)
 
   if (
-    getAllCarNumbersByColorStatus.status === "failure" &&
-    getAllCarNumbersByColorStatus.message === "NoCar"
+    getAllVehicleNumbersByColorStatus.status === "failure" &&
+    getAllVehicleNumbersByColorStatus.message === "NoCar"
   ) {
     return "No Car with the given color exist in the parking lot"
   } else {
-    return getAllCarNumbersByColorStatus.payload.join("\n")
+    return getAllVehicleNumbersByColorStatus.payload.join("\n")
   }
 }
 

@@ -1,4 +1,4 @@
-import { Car } from "./Car"
+import { Vehicle } from "./Vehicle"
 import { Slot } from "./Slot"
 export class ParkingLot {
   constructor(parkLotSize: number) {
@@ -17,11 +17,14 @@ export class ParkingLot {
     return { status: "failure", value: "ParkingLotFilled" }
   }
 
-  parkCar(carObj: Car): { status: string; message: string | number } {
+  parkVehicle(vehicleObj: Vehicle): {
+    status: string
+    message: string | number
+  } {
     const nextNearestStatusObj = this.getNextNearestSlot()
 
     if (nextNearestStatusObj.status === "success") {
-      this.parkingSlots[Number(nextNearestStatusObj.value)].park(carObj)
+      this.parkingSlots[Number(nextNearestStatusObj.value)].allot(vehicleObj)
       return {
         status: "success",
         message: this.parkingSlots[Number(nextNearestStatusObj.value)].slotId,
@@ -34,7 +37,7 @@ export class ParkingLot {
     }
   }
 
-  unParkCarBySlotNumber(slotNo: number): {
+  unParkVehicleBySlotNumber(slotNo: number): {
     status: string
     message: string | number
   } {
@@ -43,11 +46,11 @@ export class ParkingLot {
         this.parkingSlots[i].isSlotSame(slotNo) &&
         !this.parkingSlots[i].isEmpty()
       ) {
-        this.parkingSlots[i].unpark()
+        this.parkingSlots[i].unallot()
         return { status: "success", message: this.parkingSlots[i].slotId }
       }
     }
-    return { status: "failure", message: "CarNotParked" }
+    return { status: "failure", message: "vehicleNotParked" }
   }
 
   getAllParkingStatus(): string[] {
@@ -55,11 +58,12 @@ export class ParkingLot {
 
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (!this.parkingSlots[i].isEmpty()) {
+        //FIXME: change this to the getters
         arr.push(
           [
             this.parkingSlots[i].slotId,
-            this.parkingSlots[i].car!.carNumber,
-            this.parkingSlots[i].car!.carColor,
+            this.parkingSlots[i].vehicle!.vehicleNumber,
+            this.parkingSlots[i].vehicle!.vehicleColor,
           ].toString()
         )
       }
@@ -67,42 +71,42 @@ export class ParkingLot {
     return arr
   }
 
-  getSlotByCarNo(carNumber: string): {
+  getSlotByRegNo(regNumber: string): {
     status: string
     message: string | number
   } {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car!.isCarSameByCarNumber(carNumber)
+        this.parkingSlots[i].vehicle!.isVehicleSameByRegNumber(regNumber)
       ) {
         return { status: "success", message: this.parkingSlots[i].slotId }
       }
     }
 
-    return { status: "failure", message: "carNotParked" }
+    return { status: "failure", message: "vehicleNotParked" }
   }
 
-  getAllCarNumbersByColor(carColor: string): {
+  getAllVehicleNumbersByColor(vehicleColor: string): {
     status: string
     message: string
     payload: string[]
   } {
-    const carList: string[] = []
+    const vehicleList: string[] = []
 
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car!.isCarSameByCarColor(carColor)
+        this.parkingSlots[i].vehicle!.isVehicleSameByColor(vehicleColor)
       ) {
-        carList.push(this.parkingSlots[i].car!.carNumber!)
+        vehicleList.push(this.parkingSlots[i].vehicle!.vehicleNumber!)
       }
     }
-    return carList.length > 1
-      ? { status: "success", message: "", payload: carList }
-      : { status: "failure", message: "NoCar", payload: carList }
+    return vehicleList.length > 1
+      ? { status: "success", message: "", payload: vehicleList }
+      : { status: "failure", message: "NoVehicle", payload: vehicleList }
   }
-  getAllSlotsByCarColor(carColor: string): {
+  getAllSlotsByVehicleColor(vehicleColor: string): {
     status: string
     message: string
     payload: number[]
@@ -111,7 +115,7 @@ export class ParkingLot {
     for (let i = 0; i < this.parkingSlots.length; i++) {
       if (
         !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].car!.isCarSameByCarColor(carColor)
+        this.parkingSlots[i].vehicle!.isVehicleSameByColor(vehicleColor)
       ) {
         slotList.push(this.parkingSlots[i].slotId)
       }
@@ -120,7 +124,7 @@ export class ParkingLot {
       ? { status: "success", payload: slotList, message: "" }
       : {
           status: "failure",
-          message: "NoCar",
+          message: "NoVehicle",
           payload: slotList,
         }
   }
