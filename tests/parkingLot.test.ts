@@ -1,183 +1,113 @@
 import { ParkingLot } from "../src/Entities/ParkingLot"
 import { Vehicle } from "../src/Entities/Vehicle"
-import { Slot } from "../src/Entities/Slot"
 
 describe("creating the Parking lot", () => {
-  test("valid maximum parking lot size given ,passes", () => {
-    const createNewParkingLot = new ParkingLot(4)
-    const slot1 = new Slot(1)
-    const slot2 = new Slot(2)
-    const slot3 = new Slot(3)
-    const slot4 = new Slot(4)
-    expect(createNewParkingLot).toEqual({
-      parkingSlots: [slot1, slot2, slot3, slot4],
-    })
+  test("valid maximum no of floors and parking lot size given ,passes", () => {
+    const createNewParkingLot = new ParkingLot(1, 4, 1, 2)
+    const expectedParkingLot = {
+      status: "success",
+      noOfFloors: 1,
+      noOfSlots: 4,
+      totalNoOfSlots: 4,
+    }
+
+    expect(createNewParkingLot.getParkingLot()).toEqual(expectedParkingLot)
+  })
+  test("valid maximum no of floors and parking lot size given ,passes", () => {
+    const createNewParkingLot = new ParkingLot(4, 4, 1, 2)
+    const expectedParkingLot = {
+      status: "success",
+      noOfFloors: 4,
+      noOfSlots: 4,
+      totalNoOfSlots: 16,
+    }
+
+    expect(createNewParkingLot.getParkingLot()).toEqual(expectedParkingLot)
   })
 })
-const newParkingLot = new ParkingLot(6)
+const newParkingLot = new ParkingLot(1, 4)
 describe("Creating a new Parking lot and parking the cars in the parking slots", () => {
-  test("park the car 1 , should be parked", () => {
-    const validCar = new Vehicle("KA40M8500", "white", "car")
-
+  test("park the truck , should be parked", () => {
+    const validCar = new Vehicle("KA40M8500", "white", "truck")
     const parkedSlot = newParkingLot.parkVehicle(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "success",
-      message: 1,
+      message: [0, 0],
     })
   })
-  test("park the car 2 , should be parked", () => {
-    const validCar = new Vehicle("KA40M8501", "red", "car")
-
-    const parkedSlot = newParkingLot.parkVehicle(validCar)
-    expect(parkedSlot).toStrictEqual({
-      status: "success",
-      message: 2,
-    })
-  })
-  test("park the car 3 , should be parked", () => {
-    const validCar = new Vehicle("KA40M8502", "white", "car")
-
-    const parkedSlot = newParkingLot.parkVehicle(validCar)
-    expect(parkedSlot).toStrictEqual({
-      status: "success",
-      message: 3,
-    })
-  })
-  test("park the car 4 , should be parked", () => {
-    const validCar = new Vehicle("KA40M8503", "green", "car")
-
-    const parkedSlot = newParkingLot.parkVehicle(validCar)
-    expect(parkedSlot).toStrictEqual({
-      status: "success",
-      message: 4,
-    })
-  })
-  test("park the car 5 , should be parked", () => {
-    const validCar = new Vehicle("KA40M8504", "white", "car")
-
-    const parkedSlot = newParkingLot.parkVehicle(validCar)
-    expect(parkedSlot).toStrictEqual({
-      status: "success",
-      message: 5,
-    })
-  })
-  test("park the car 6 , should be parked", () => {
-    const validCar = new Vehicle("KA40M8505", "blue", "car")
-
-    const parkedSlot = newParkingLot.parkVehicle(validCar)
-    expect(parkedSlot).toStrictEqual({
-      status: "success",
-      message: 6,
-    })
-  })
-  test("park the car 7, should not be parked", () => {
-    const validCar = new Vehicle("KA40M8506", "blue", "car")
-
+  test("park the truck , should not be parked", () => {
+    const validCar = new Vehicle("KA40M8501", "white", "truck")
     const parkedSlot = newParkingLot.parkVehicle(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "failure",
       message: "ParkingLotFilled",
     })
   })
-  test("unpark the car that would return the slot id which freed", () => {
-    const unparkStatus = newParkingLot.unParkVehicleBySlotNumber(2)
-    expect(unparkStatus).toStrictEqual({
+
+  test("park the bike , should be parked", () => {
+    const validCar = new Vehicle("KA40M8502", "red", "bike")
+    const parkedSlot = newParkingLot.parkVehicle(validCar)
+    expect(parkedSlot).toStrictEqual({
       status: "success",
-      message: 2,
+      message: [0, 1],
     })
   })
-  test("unpark the car that doesnt exist in the slot  , should return an  error message", () => {
-    const parkedSlot = newParkingLot.unParkVehicleBySlotNumber(9)
+  test("park the bike , should be parked", () => {
+    const validCar = new Vehicle("KA40M8503", "white", "bike")
+    const parkedSlot = newParkingLot.parkVehicle(validCar)
+    expect(parkedSlot).toStrictEqual({
+      status: "success",
+      message: [0, 2],
+    })
+  })
+  test("park the bike  , should not be parked", () => {
+    const validCar = new Vehicle("KA40M8504", "green", "bike")
+    const parkedSlot = newParkingLot.parkVehicle(validCar)
     expect(parkedSlot).toStrictEqual({
       status: "failure",
+      message: "ParkingLotFilled",
+    })
+  })
+  test("park the car , should be parked", () => {
+    const validCar = new Vehicle("KA40M8505", "red", "car")
+    const parkedSlot = newParkingLot.parkVehicle(validCar)
+    expect(parkedSlot).toStrictEqual({
+      status: "success",
+      message: [0, 3],
+    })
+  })
+  test("park the car , should be parked", () => {
+    const validCar = new Vehicle("KA40M8506", "red", "car")
+    const parkedSlot = newParkingLot.parkVehicle(validCar)
+    expect(parkedSlot).toStrictEqual({
+      status: "success",
+      message: [0, 4],
+    })
+  })
+  test("park the car  , should not be parked", () => {
+    const validCar = new Vehicle("KA40M8507", "green", "car")
+    const parkedSlot = newParkingLot.parkVehicle(validCar)
+    expect(parkedSlot).toStrictEqual({
+      status: "failure",
+      message: "ParkingLotFilled",
+    })
+  })
+  test("unpark any vehicle, should not be unparked", () => {
+    const unParkingStatus = newParkingLot.unParkVehicleBySlotNumber(0, 1)
+    expect(unParkingStatus).toStrictEqual({
+      status: "success",
+      message: "VehicleUnParked",
+    })
+  })
+  test("unpark any vehicle, should not be unparked", () => {
+    const unParkingStatus = newParkingLot.unParkVehicleBySlotNumber(0, 1)
+    expect(unParkingStatus).toStrictEqual({
+      status: "failure",
       message: "vehicleNotParked",
     })
   })
 })
-describe("Checking for the next nearest spot in the parking lot", () => {
-  test("should return valid empty slot in the parking lot containing empty slots", () => {
-    const nextParkingLotObj = newParkingLot.getNextNearestSlot()
-    expect(nextParkingLotObj).toStrictEqual({
-      status: "success",
-      value: 1,
-    })
-  })
-  test("should park a car ", () => {
-    const carObj = new Vehicle("MH01M6787", "purple", "car")
 
-    const parkCarStatus = newParkingLot.parkVehicle(carObj)
-    expect(parkCarStatus).toStrictEqual({
-      status: "success",
-      message: 2,
-    })
-  })
-  test("should return parkinglot filled status", () => {
-    const nextParkingLotObj = newParkingLot.getNextNearestSlot()
-    expect(nextParkingLotObj).toStrictEqual({
-      status: "failure",
-      value: "ParkingLotFilled",
-    })
-  })
-})
-describe("checking for the slot number based on the car registration number", () => {
-  test("should return the car number", () => {
-    expect(newParkingLot.getSlotByRegNo("KA40M8505")).toStrictEqual({
-      status: "success",
-      message: 6,
-    })
-  })
-  test("should return the car not parkied status", () => {
-    expect(newParkingLot.getSlotByRegNo("KA40M8599")).toStrictEqual({
-      status: "failure",
-      message: "vehicleNotParked",
-    })
-  })
-})
-
-describe("checking for the car numbers based on the car colors", () => {
-  test("should return all the cars with the given color", () => {
-    expect(newParkingLot.getAllVehicleNumbersByColor("white")).toStrictEqual({
-      status: "success",
-      message: "",
-      payload: ["KA40M8500", "KA40M8502", "KA40M8504"],
-    })
-  })
-  test("should return an empty array of cars with invalid car color given", () => {
-    expect(
-      newParkingLot.getAllVehicleNumbersByColor(
-        "invalidColor||colorNotInParkingLot"
-      )
-    ).toStrictEqual({ status: "failure", message: "NoVehicle", payload: [] })
-  })
-})
-
-describe("Checking for the slot numbers based on the car color", () => {
-  test("Should return all the slots with the given color", () => {
-    expect(newParkingLot.getAllSlotsByVehicleColor("white")).toStrictEqual({
-      status: "success",
-      message: "",
-      payload: [1, 3, 5],
-    })
-  })
-  test("should return an empty array and failure mesage for the invalid color", () => {
-    expect(
-      newParkingLot.getAllSlotsByVehicleColor("InvalidCarColor")
-    ).toStrictEqual({
-      status: "failure",
-      message: "NoVehicle",
-      payload: [],
-    })
-  })
-})
-describe("checking for the complete parking Slot status", () => {
-  test("should return all the alloted parking slots", () => {
-    expect(newParkingLot.getAllParkingStatus()).toStrictEqual([
-      "1,KA40M8500,white",
-      "2,MH01M6787,purple",
-      "3,KA40M8502,white",
-      "4,KA40M8503,green",
-      "5,KA40M8504,white",
-      "6,KA40M8505,blue",
-    ])
-  })
+describe("getting the parking lot status", () => {
+  test("should return ", () => {})
 })

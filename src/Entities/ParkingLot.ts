@@ -1,33 +1,73 @@
 import { Vehicle } from "./Vehicle"
-import { Slot } from "./Slot"
+import { ParkingFloor } from "./ParkingFloor"
 export class ParkingLot {
-  constructor(parkLotSize: number) {
-    this.parkingSlots = new Array()
-    for (let i = 0; i < parkLotSize; i++) {
-      this.parkingSlots.push(new Slot(i + 1))
+  constructor(
+    noOfFloors: number,
+    noOfSlots: number,
+    noofTrucksOnFloor: number = 1,
+    noOfBikesOnFloor: number = 2
+  ) {
+    this.noOfFloors = noOfFloors
+    this.noOfSlots = noOfSlots
+    this.parkingLot = new Array()
+    for (let i = 0; i < this.noOfFloors; i++) {
+      this.parkingLot.push(
+        new ParkingFloor(noOfSlots, noofTrucksOnFloor, noOfBikesOnFloor)
+      )
     }
   }
 
-  parkingSlots: Slot[]
+  parkingLot: ParkingFloor[]
+  noOfFloors: number
+  noOfSlots: number
 
-  getNextNearestSlot() {
-    for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (this.parkingSlots[i].isEmpty()) return { status: "success", value: i }
+  public getParkingLot() {
+    return {
+      status: "success",
+      noOfFloors: this.noOfFloors,
+      noOfSlots: this.noOfSlots,
+      totalNoOfSlots: this.noOfFloors * this.noOfSlots,
     }
-    return { status: "failure", value: "ParkingLotFilled" }
+  }
+
+  getNextNearestSlot(vehicleTypeToCheck: string) {
+    for (let i = 0; i < this.noOfFloors; i++) {
+      let parkingStatus =
+        this.parkingLot[i].getNextNearestSlotInFloor(vehicleTypeToCheck)
+      if (parkingStatus.status == "success") {
+        return {
+          status: "success",
+          parkingFloor: i,
+          parkingSlot: Number(parkingStatus.value),
+        }
+      }
+    }
+    return {
+      status: "failure",
+      message: "NoSlotsAvailabale",
+    }
   }
 
   parkVehicle(vehicleObj: Vehicle): {
     status: string
-    message: string | number
+    message: string[] | number[] | string
   } {
-    const nextNearestStatusObj = this.getNextNearestSlot()
+    const nextNearestStatusObj = this.getNextNearestSlot(vehicleObj.vehicleType)
+    console.log("nextNearestStatusObj")
+    console.log(nextNearestStatusObj)
+    console.log("nextNearestStatusObj")
 
-    if (nextNearestStatusObj.status === "success") {
-      this.parkingSlots[Number(nextNearestStatusObj.value)].allot(vehicleObj)
+    if (nextNearestStatusObj.status == "success") {
+      this.parkingLot[nextNearestStatusObj.parkingFloor!].parkingFloor[
+        nextNearestStatusObj.parkingSlot!
+      ].allot(vehicleObj)
+
       return {
         status: "success",
-        message: this.parkingSlots[Number(nextNearestStatusObj.value)].slotId,
+        message: [
+          nextNearestStatusObj.parkingFloor!,
+          nextNearestStatusObj.parkingSlot!,
+        ],
       }
     } else {
       return {
@@ -37,95 +77,29 @@ export class ParkingLot {
     }
   }
 
-  unParkVehicleBySlotNumber(slotNo: number): {
+  unParkVehicleBySlotNumber(
+    floorNo: number,
+    slotNo: number
+  ): {
     status: string
     message: string | number
   } {
-    for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (
-        this.parkingSlots[i].isSlotSame(slotNo) &&
-        !this.parkingSlots[i].isEmpty()
-      ) {
-        this.parkingSlots[i].unallot()
-        return { status: "success", message: this.parkingSlots[i].slotId }
-      }
-    }
-    return { status: "failure", message: "vehicleNotParked" }
-  }
-
-  getAllParkingStatus(): string[] {
-    var arr: string[] = []
-
-    for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (!this.parkingSlots[i].isEmpty()) {
-        //FIXME: change this to the getters
-        arr.push(
-          [
-            this.parkingSlots[i].slotId,
-            this.parkingSlots[i].vehicle!.vehicleNumber,
-            this.parkingSlots[i].vehicle!.vehicleColor,
-          ].toString()
-        )
-      }
-    }
-    return arr
-  }
-
-  getSlotByRegNo(regNumber: string): {
-    status: string
-    message: string | number
-  } {
-    for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (
-        !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].vehicle!.isVehicleSameByRegNumber(regNumber)
-      ) {
-        return { status: "success", message: this.parkingSlots[i].slotId }
-      }
+    if (this.parkingLot[floorNo]!.parkingFloor[slotNo].isEmpty()) {
+      this.parkingLot[floorNo].parkingFloor[slotNo].unallot()
+      return { status: "success", message: "VehicleUnParked" }
     }
 
     return { status: "failure", message: "vehicleNotParked" }
   }
 
-  getAllVehicleNumbersByColor(vehicleColor: string): {
-    status: string
-    message: string
-    payload: string[]
-  } {
-    const vehicleList: string[] = []
+  getAllFreeSlots(vehicleType: string) {
+    var freeSlots = []
 
-    for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (
-        !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].vehicle!.isVehicleSameByColor(vehicleColor)
-      ) {
-        vehicleList.push(this.parkingSlots[i].vehicle!.vehicleNumber!)
-      }
+    for (let i = 0; i < this.noOfFloors; i++) {
+      freeSlots.push(
+        this.parkingLot[i].getFreeSlotsBasedOnVehicleType(vehicleType)
+      )
     }
-    return vehicleList.length > 1
-      ? { status: "success", message: "", payload: vehicleList }
-      : { status: "failure", message: "NoVehicle", payload: vehicleList }
-  }
-  getAllSlotsByVehicleColor(vehicleColor: string): {
-    status: string
-    message: string
-    payload: number[]
-  } {
-    const slotList: number[] = []
-    for (let i = 0; i < this.parkingSlots.length; i++) {
-      if (
-        !this.parkingSlots[i].isEmpty() &&
-        this.parkingSlots[i].vehicle!.isVehicleSameByColor(vehicleColor)
-      ) {
-        slotList.push(this.parkingSlots[i].slotId)
-      }
-    }
-    return slotList.length > 1
-      ? { status: "success", payload: slotList, message: "" }
-      : {
-          status: "failure",
-          message: "NoVehicle",
-          payload: slotList,
-        }
+    return freeSlots
   }
 }

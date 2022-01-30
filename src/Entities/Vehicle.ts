@@ -12,18 +12,12 @@ export class Vehicle {
   vehicleColor: string
   vehicleType: string
 
-  // create(carNumber: string, carColor: string) {
-  //   this.carNumber = carNumber
-  //   this.carColor = carColor
-  //   return this
-  // }
-
   isVehicleSameByRegNumber(carNumberTobeChecked: string) {
     return (
       this.vehicleNumber.toLowerCase() === carNumberTobeChecked.toLowerCase()
     )
   }
-  isVehicleSameByColor(carColorTobeChecked: string) {
-    return this.vehicleColor.toLowerCase() === carColorTobeChecked.toLowerCase()
-  }
+  // isVehicaleSameType(carTypeTobeChecked: string) {
+  //   return this.vehicleType.toLowerCase() === carTypeTobeChecked.toLowerCase()
+  // }
 }
