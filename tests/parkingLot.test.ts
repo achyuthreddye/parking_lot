@@ -119,9 +119,14 @@ describe("Creating a new Parking lot and parking the cars in the parking slots",
 })
 
 describe("getting the parking lot status", () => {
-  test("testing for the empty spaces in the parking lot", () => {
-    const freeSlots = newParkingLot.getAllFreeSlots("bike")
+  test("testing for the free slots in the parking lot", () => {
+    const freeSlots = newParkingLot.getAllFreeSlots("car")
 
-    expect(freeSlots).toStrictEqual([[1], []])
+    expect(freeSlots).toStrictEqual([[], [3, 4]])
+  })
+  test("testing for the occupied slots in the parking lot", () => {
+    const occupiedSlots = newParkingLot.getAllOccupiedSlots("car")
+
+    expect(occupiedSlots).toStrictEqual([[3, 4], []])
   })
 })

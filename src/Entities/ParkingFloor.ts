@@ -35,12 +35,24 @@ export class ParkingFloor {
     const freeSlotIds: number[] = []
     for (let slotId = 0; slotId < this.parkingFloor.length; slotId++) {
       if (
-        !this.parkingFloor[slotId].isSlotAlloted() &&
-        this.parkingFloor[slotId].isSlotSameType(vehicleTypeToCheck)
+        this.parkingFloor[slotId].isSlotSameType(vehicleTypeToCheck) &&
+        !this.parkingFloor[slotId].isSlotAlloted()
       ) {
         freeSlotIds.push(slotId)
       }
     }
     return freeSlotIds
+  }
+  getOccupiedBasedOnVehicleType(vehicleTypeToCheck: string) {
+    const occupiedSlotIds: number[] = []
+    for (let slotId = 0; slotId < this.parkingFloor.length; slotId++) {
+      if (
+        this.parkingFloor[slotId].isSlotSameType(vehicleTypeToCheck) &&
+        this.parkingFloor[slotId].isSlotAlloted()
+      ) {
+        occupiedSlotIds.push(slotId)
+      }
+    }
+    return occupiedSlotIds
   }
 }

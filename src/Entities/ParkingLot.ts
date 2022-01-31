@@ -100,4 +100,15 @@ export class ParkingLot {
 
     return freeSlots
   }
+  getAllOccupiedSlots(vehicleType: string) {
+    var occupiedSlots = []
+
+    for (let i = 0; i < this.noOfFloors; i++) {
+      occupiedSlots.push(
+        this.parkingLot[i].getOccupiedBasedOnVehicleType(vehicleType)
+      )
+    }
+
+    return occupiedSlots
+  }
 }
