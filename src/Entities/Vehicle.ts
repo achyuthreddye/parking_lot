@@ -17,7 +17,4 @@ export class Vehicle {
       this.vehicleNumber.toLowerCase() === carNumberTobeChecked.toLowerCase()
     )
   }
-  // isVehicaleSameType(carTypeTobeChecked: string) {
-  //   return this.vehicleType.toLowerCase() === carTypeTobeChecked.toLowerCase()
-  // }
 }

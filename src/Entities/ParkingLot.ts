@@ -53,9 +53,6 @@ export class ParkingLot {
     message: string[] | number[] | string
   } {
     const nextNearestStatusObj = this.getNextNearestSlot(vehicleObj.vehicleType)
-    console.log("nextNearestStatusObj")
-    console.log(nextNearestStatusObj)
-    console.log("nextNearestStatusObj")
 
     if (nextNearestStatusObj.status == "success") {
       this.parkingLot[nextNearestStatusObj.parkingFloor!].parkingFloor[
@@ -84,7 +81,7 @@ export class ParkingLot {
     status: string
     message: string | number
   } {
-    if (this.parkingLot[floorNo]!.parkingFloor[slotNo].isEmpty()) {
+    if (this.parkingLot[floorNo]!.parkingFloor[slotNo].isSlotAlloted()) {
       this.parkingLot[floorNo].parkingFloor[slotNo].unallot()
       return { status: "success", message: "VehicleUnParked" }
     }
@@ -100,6 +97,7 @@ export class ParkingLot {
         this.parkingLot[i].getFreeSlotsBasedOnVehicleType(vehicleType)
       )
     }
+
     return freeSlots
   }
 }

@@ -7,17 +7,17 @@ export class Slot {
   }
 
   vehicle: Vehicle | null
-  parked: boolean = false
+  isParked: boolean = false
   slotId: number
   slotType: string
 
   allot(vehicleTobeParked: Vehicle) {
-    this.parked = true
+    this.isParked = true
     this.vehicle = vehicleTobeParked
   }
 
   unallot() {
-    this.parked = false
+    this.isParked = false
     this.vehicle = null
   }
 
@@ -29,7 +29,7 @@ export class Slot {
     return this.slotId === slotNo
   }
 
-  isEmpty() {
-    return this.parked
+  isSlotAlloted() {
+    return this.isParked
   }
 }
