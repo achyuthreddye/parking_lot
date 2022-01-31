@@ -1,11 +1,7 @@
 import {
   createParkingLot,
-  // getAllCarNumbersByColor,
-  // getAllParkingStatus,
-  // getAllSlotsByCarColor,
-  // getSlotByCarNo,
-  // parkCar,
-  // unParkCarBySlotNumber,
+  parkVehicle,
+  unParkVehicleBySlotNumber,
 } from "./wrapper"
 
 export function processUsercommands(input: string) {
@@ -20,24 +16,12 @@ export function processUsercommands(input: string) {
         )
       )
       break
-    // case "park":
-    //   console.log(parkCar(input))
-    //   break
-    // case "leave":
-    //   console.log(unParkCarBySlotNumber(Number(input.split(" ")[1])))
-    //   break
-    // case "status":
-    //   console.log(getAllParkingStatus())
-    //   break
-    // case "registration_numbers_for_cars_with_colour":
-    //   console.log(getAllCarNumbersByColor(input.split(" ")[1]))
-    //   break
-    // case "slot_numbers_for_cars_with_colour":
-    //   console.log(getAllSlotsByCarColor(input.split(" ")[1]))
-    //   break
-    // case "slot_number_for_registration_number":
-    //   console.log(getSlotByCarNo(input.split(" ")[1]))
-    //   break
+    case "park":
+      console.log(parkVehicle(input))
+      break
+    case "leave":
+      console.log(unParkVehicleBySlotNumber(input))
+      break
     case "quit":
       process.exit(0)
     default:
